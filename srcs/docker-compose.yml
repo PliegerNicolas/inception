@@ -1,0 +1,51 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    docker-compose.yml                                 :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: nplieger <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/09/19 14:27:18 by nplieger          #+#    #+#              #
+#    Updated: 2023/09/19 15:09:30 by nplieger         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+version: '3.8'
+
+# Services #
+services:
+  nginx:
+
+    container_name: nginx
+    build: ./requirements/nginx
+    restart: always
+    depends_on:
+      - wordpress
+    ports:
+      - "443:443"
+    networks:
+      - inception
+
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+    networks:
+      - inception
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - inception
+
+# Networks #
+networks:
+  inception:
+    driver: bridge
