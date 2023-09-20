@@ -13,12 +13,14 @@ version: '3.8'
 
 # Services #
 services:
+
   nginx:
+    container_name: nginx
     build:
       context: ./requirements/nginx
+      dockerfile: Dockerfile
       args:
         DOMAIN_NAME: ${DOMAIN_NAME}
-    container_name: nginx
     restart: always
     env_file:
       - .env
@@ -26,6 +28,22 @@ services:
       - "443:443"
     networks:
       - inception
+
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - inception
+
+
+# Volumes #
+volumes:
+  wordpress_data:
 
 # Networks #
 networks:

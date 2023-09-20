@@ -5,9 +5,9 @@ FROM	alpine:3.18.3
 ARG	DOMAIN_NAME
 
 # Install Nginx and clear cache to free up space in image
-RUN	apk update && apk upgrade \
-		&& apk add --no-cache nginx \
-		&& apk add --no-cache openssl \
+RUN	apk update && apk upgrade && apk add --no-cache \
+		nginx \
+		openssl \
 	&& rm -rf /var/cache/apk/*
 
 
