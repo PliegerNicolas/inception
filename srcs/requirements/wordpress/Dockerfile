@@ -28,8 +28,8 @@ RUN	adduser -D -g '' -G www-data www-data
 # Create /run/php-fpm directory for php-fpm to store it's runtime files. Make www-data it's owner.
 RUN	mkdir /run/php-fpm && chown www-data:www-data /run/php-fpm
 
-# Expose port 8080 to connect via reverse-proxy too from NGINX
-EXPOSE	8080
+# Expose port 9000 to connect via reverse-proxy too from NGINX
+EXPOSE	9000
 
 # Start PHP-FPM in forground
 CMD	["php-fpm82", "-F"]
