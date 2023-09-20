@@ -12,7 +12,7 @@
 
 NAME			:=		inception
 
-COMPOSE			:=		docker-compose -p $(NAME)
+COMPOSE			:=		docker compose -p $(NAME)
 COMPOSE_FILE		:=		./srcs/docker-compose.yml
 
 all:	up
