@@ -21,8 +21,7 @@ RUN	openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 # Copy nginx configuration file to the container
 COPY	./conf/nginx.conf /etc/nginx/nginx.conf
 
-# Expose port 80 for HTTP traffic
-EXPOSE	80
+# Expose port 443 for HTTPS traffic
 EXPOSE	443
 
 # Run nginx
