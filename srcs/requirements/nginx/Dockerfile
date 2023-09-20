@@ -4,7 +4,7 @@ FROM	alpine:3.18.3
 # Retrieve .env variables
 ARG	DOMAIN_NAME
 
-# Install Nginx and clear cache to free up space in image
+# Install dependencies and clear apk cache to free up space
 RUN	apk update && apk upgrade && apk add --no-cache \
 		nginx \
 		openssl \

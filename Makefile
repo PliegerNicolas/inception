@@ -21,7 +21,7 @@ up:
 	$(COMPOSE) -f $(COMPOSE_FILE) up -d --build
 
 down:
-	$(COMPOSE) -f $(COMPOSE_FILE) down
+	$(COMPOSE) -f $(COMPOSE_FILE) down --rmi local
 
 start:
 	$(COMPOSE) -f $(COMPOSE_FILE) start
@@ -32,7 +32,6 @@ stop:
 re:
 	$(COMPOSE) -f $(COMPOSE_FILE) up -d --build
 
-clean:
-	$(COMPOSE) -f $(COMPOSE_FILE) down --rmi all
+clean:	down
 
 .PHONY: up down start stop re clean
