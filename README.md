@@ -23,7 +23,6 @@ This project aims to broaden my knowledge of system administration by using Dock
 - The project's structure should be as [follows](#project-structure).
 
 ## Project structure
-[project-structure-link]: #project-structure
 
 The project should be structured something like this but liberties can be taken of course.
 
@@ -93,7 +92,6 @@ mkdir -p data/wordpress
 ```
 
 ## Environnement file (.env)
-[Environnement file (.env)](#environnement-file-env)
 
 ```
 NAME=${USER}
