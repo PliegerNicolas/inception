@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 13:38:49 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/21 15:07:24 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/21 17:00:48 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,4 +34,7 @@ re:
 
 clean:	down
 
-.PHONY: up down start stop re clean
+prune:
+	docker image prune -af
+
+.PHONY: up down start stop re clean prune

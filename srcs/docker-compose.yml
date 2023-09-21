@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 14:46:20 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/21 15:16:59 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/21 15:25:09 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Latest version as of 21 september 2023
@@ -19,7 +19,9 @@ services:
     container_name: nginx
     build:
       context: ./requirements/nginx
-      dockerfile: Dockerfile
+      args:
+        DOMAIN_NAME: ${DOMAIN_NAME}
+        CERTS_: ${CERTS_}
     restart: unless-stopped
     env_file:
       - .env
