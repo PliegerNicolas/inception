@@ -92,7 +92,7 @@ mkdir -p data/mysql
 mkdir -p data/wordpress
 ```
 
-[Here]: #env-structure
+[env-structure]: #env-structure
 ## Environnement file (.env)
 
 ```
