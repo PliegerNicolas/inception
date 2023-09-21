@@ -98,7 +98,7 @@ NAME=${USER}
 DOMAIN_NAME=${NAME}.42.fr
 
 # certificates
-CERTS_=/etc/nginx/ssl/certs
+CERTS_=/etc/nginx/ssl/certificats
 
 # MYSQL SETUP
 MYSQL_USER=${NAME}
