@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 14:56:02 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/21 17:21:07 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/21 17:25:01 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -28,16 +28,19 @@ RUN	mkdir -p ${CERTS_} && \
 		-out ${CERTS_}/${DOMAIN_NAME}.crt \
 		-subj "/C=FR/ST=Île De France/L=Paris/O=42School/CN=${DOMAIN_NAME}"
 
-# Setup and generate '/etc/nginx/nginx.conf' file from template with .env variables
-RUN	apk update && apk upgrade && apk add \
-		--no-cache sed && \
-	mkdir -p /etc/nginx/generate_conf_file
+# Generate and populate with .env variables 'nginx.conf'
+# 1. build temporary 'generate_conf_file' directory.
+# 2. install sed dependency.
+# 3. copy nginx.config.template and generate_nginx_config.sh.
+# 4. modify permissions on .sh file and execute it.
+# 5. delete generate_conf_file foldler and remove sed dependency.
+RUN	mkdir -p /etc/nginx/generate_conf_file
+RUN	apk update && apk upgrade && apk add --no-cache sed
 COPY	./tools/generate_nginx_config.sh /etc/nginx/generate_conf_file/
 COPY	./conf/nginx.config.template /etc/nginx/generate_conf_file/
-RUN	chmod +x /etc/nginx/generate_conf_file/generate_nginx_config.sh && \
-	sh /etc/nginx/generate_conf_file/generate_nginx_config.sh && \
-	rm -rf /etc/nginx/generate_conf_file
-RUN	apk del --purge sed
+RUN	chmod +x /etc/nginx/generate_conf_file/generate_nginx_config.sh
+RUN	sh /etc/nginx/generate_conf_file/generate_nginx_config.sh
+RUN	rm -rf /etc/nginx/generate_conf_file && apk del --purge sed
 
 # Expose port 443 for HTTPS traffic
 EXPOSE	443
