@@ -3,15 +3,16 @@
 #                                                         :::      ::::::::    #
 #    docker-compose.yml                                 :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nplieger <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/09/19 14:27:18 by nplieger          #+#    #+#              #
-#    Updated: 2023/09/19 18:58:53 by nplieger         ###   ########.fr        #
+#    Created: 2023/09/21 14:46:20 by nicolas           #+#    #+#              #
+#    Updated: 2023/09/21 15:16:59 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+# Latest version as of 21 september 2023
 version: '3.8'
 
-# Services #
+# Services
 services:
 
   nginx:
@@ -19,33 +20,32 @@ services:
     build:
       context: ./requirements/nginx
       dockerfile: Dockerfile
-      args:
-        DOMAIN_NAME: ${DOMAIN_NAME}
-    restart: always
+    restart: unless-stopped
     env_file:
       - .env
     ports:
-      - "443:443"
+      - '443:443'
+    volumes:
+      - wordpress_data:/var/www/html
     networks:
       - inception
 
-  wordpress:
-    container_name: wordpress
-    build:
-      context: ./requirements/wordpress
-      dockerfile: Dockerfile
-    restart: always
-    env_file:
-      - .env
-    networks:
-      - inception
-
-
-# Volumes #
+# Volumes
 volumes:
   wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/${NAME}/data/wordpress
+      o: bind
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/${NAME}/data/mysql
+      o: bind
 
-# Networks #
+# Networks
 networks:
   inception:
     driver: bridge

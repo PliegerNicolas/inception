@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nplieger <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/09/18 17:27:57 by nplieger          #+#    #+#              #
-#    Updated: 2023/09/19 15:37:56 by nplieger         ###   ########.fr        #
+#    Created: 2023/09/21 13:38:49 by nicolas           #+#    #+#              #
+#    Updated: 2023/09/21 15:07:24 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ up:
 	$(COMPOSE) -f $(COMPOSE_FILE) up -d --build
 
 down:
-	$(COMPOSE) -f $(COMPOSE_FILE) down --rmi local
+	$(COMPOSE) -f $(COMPOSE_FILE) down --volumes --rmi local
 
 start:
 	$(COMPOSE) -f $(COMPOSE_FILE) start
