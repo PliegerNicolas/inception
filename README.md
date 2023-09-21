@@ -48,36 +48,14 @@ The project should be structured something like this but liberties can be taken 
             └── .dockerignore
 ```
 
-[project-structure-link]: #env-structure
-## .env file model
-
-```
-NAME=${USER}
-DOMAIN_NAME=${NAME}.42.fr
-
-# certificates
-CERTS_=/etc/nginx/ssl/certs
-
-# MYSQL SETUP
-MYSQL_USER=${NAME}
-MYSQL_ROOT_PASSWORD=Password
-MYSQL_PASSWORD=Password
-
-# WORDPRESS SETUP
-WORDPRESS_NAME=wordpress
-WORDPRESS_USER_EMAIL=${NAME}@42.fr
-WORDPRESS_ROOT_EMAIL=root@42.fr
-WORDPRESS_ROOT_LOGIN=root
-```
-
 ## Project setup
 
 To setup a new local `domain name` you can go to ...
 
 ```sudo nano /etc/hosts```
 
-And complete the file as this :
-/!\ Careful ! `${name}` is not available in `/etc/hosts` and should be `hard-coded`.
+And complete the file as this :     
+`${name}` is not available in `/etc/hosts` and should be `hard-coded`.
 
 ```
 # This file describes a number of hostname-to-address
@@ -111,4 +89,27 @@ You should also create the volume directories in your HOST machine :
 cd ~
 mkdir -p data
 mkdir -p data/mysql
+mkdir -p data/wordpress
+```
+
+[Here]: #env-structure
+## Environnement file (.env)
+
+```
+NAME=${USER}
+DOMAIN_NAME=${NAME}.42.fr
+
+# certificates
+CERTS_=/etc/nginx/ssl/certs
+
+# MYSQL SETUP
+MYSQL_USER=${NAME}
+MYSQL_ROOT_PASSWORD=Password
+MYSQL_PASSWORD=Password
+
+# WORDPRESS SETUP
+WORDPRESS_NAME=wordpress
+WORDPRESS_USER_EMAIL=${NAME}@42.fr
+WORDPRESS_ROOT_EMAIL=root@42.fr
+WORDPRESS_ROOT_LOGIN=root
 ```
