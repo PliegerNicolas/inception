@@ -19,7 +19,7 @@ This project aims to broaden my knowledge of system administration by using Dock
 - On crash, the containers should restart.
 - The domain name must be `${name}.42.fr` (and `www.${name}.42.fr` optionnally).
 - The 'latest' tag is prohibited.
-- Environment variables are mandatory. `.env` file should be located in the same directory as the `docker-compose.yml` file. Technically, `.env` shouldn't be available in github per security reasons. [Here](#env-structure) is a model If you want to build your own.
+- Environment variables are mandatory. `.env` file should be located in the same directory as the `docker-compose.yml` file. Technically, `.env` shouldn't be available in github per security reasons. [Here](#environnement-file-env) is a model If you want to build your own.
 - The project's structure should be as [follows](#project-structure).
 
 ## Project structure
@@ -93,7 +93,7 @@ mkdir -p data/wordpress
 ```
 
 ## Environnement file (.env)
-[env-structure]: #env-structure
+[Environnement file (.env)](#environnement-file-env)
 
 ```
 NAME=${USER}
