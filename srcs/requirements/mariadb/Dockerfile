@@ -45,4 +45,4 @@ RUN	chmod +x /etc/scripts/generate_initialize_mariadb.sh && \
 # Expose port 3006 (default mariadb port = 3306)
 EXPOSE	3306
 
-CMD ["mysqld", "--user=mysql", "--console", "--skip-name-resolve", "--skip-networking=0"]
+CMD ["usr/bin/mysqld", "--user=mysql", "--console", "--skip-name-resolve", "--skip-networking=0"]
