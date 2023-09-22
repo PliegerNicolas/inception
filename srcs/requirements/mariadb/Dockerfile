@@ -27,10 +27,7 @@ RUN	apk update && apk upgrade && apk add --no-cache \
 # 5. rm the generator file but keep the initialize_*.sh file
 # 6. rm and purge sed dependencie
 RUN	mkdir -p /etc/scripts && \
-	mkdir -p /etc/scripts/pre-exec.d && \
-	mkdir -p /etc/scripts/pre-init.d && \
 	chmod -R 755 /etc/scripts && \
-	mkdir -p /etc/docker-entrypoint-initdb.d
 
 COPY	./conf/initialize_mariadb.sh.template /etc/scripts/
 COPY	./tools/generate_initialize_mariadb.sh /etc/scripts/

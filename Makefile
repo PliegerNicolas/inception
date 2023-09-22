@@ -37,5 +37,7 @@ prune:
 
 clean:	down prune
 
+system_prune:
+	docker system prune -a
 
-.PHONY: up down start stop re prune clean
+.PHONY: up down start stop re prune clean system_prune
