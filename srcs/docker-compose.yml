@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 14:46:20 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/21 23:30:06 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/22 20:24:37 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Latest version as of 21 september 2023
@@ -36,6 +36,13 @@ services:
     container_name: mariadb
     build:
       context: ./requirements/mariadb
+      args:
+        DB_TITLE: ${DB_TITLE}
+        DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+        DB_USER_NAME: ${DB_USER_NAME}
+        DB_USER_PASSWORD: ${DB_USER_PASSWORD}
+        DB_ADMIN_NAME: ${DB_ADMIN_NAME}
+        DB_ADMIN_PASSWORD: ${DB_ADMIN_PASSWORD}
     restart: unless-stopped
     env_file:
       - .env
@@ -50,13 +57,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/${NAME}/data/wordpress
+      device: /home/${APP_USER}/data/wordpress
       o: bind
   mariadb_data:
     driver: local
     driver_opts:
       type: none
-      device: /home/${NAME}/data/mysql
+      device: /home/${APP_USER}/data/mysql
       o: bind
 
 # Networks

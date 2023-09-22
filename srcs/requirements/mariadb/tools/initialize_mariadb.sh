@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "${DB_TITLE}"
+# Based on "https://github.com/yobasystems/alpine-mariadb/"
 
 # Set run-time folder for mariadb
 if [ -d "/run/mysql" ]; then
@@ -12,63 +12,75 @@ else
 	chown -R mysql:mysql /run/mysqld
 fi
 
-# Initialize database
-mysql_install_db --user=mysql --ldata=/var/lib/mysql >> /dev/null
+if [ ! -d "/var/lib/mysql/mysql" ]; then
 
-# Create temporary file to intialize database content
-temp_file="/tmp/my_temp_file.$(date +%s)"
-touch "${temp_file}"
+	echo "[i] MySQL directory not found, creating initial DB."
 
-if [ ! -f "$temp_file" ]; then
-	return 1
-fi
+	chown -R mysql:mysql /var/lib/mysql
+	# Initialize database
+	mysql_install_db --user=mysql --ldata=/var/lib/mysql >> /dev/null
 
-cat << EOF > $temp_file
+	# Create temporary file to intialize database content
+	temp_file="/tmp/my_temp_file.$(date +%s)"
+	touch "${temp_file}"
 
-USE mysql;
-FLUSH PRIVILEGES ;
-GRANT ALL ON *.* TO 'root'@'localhost' identified by '${DB_ROOT_PASSWORD}' WITH GRANT OPTION ;
-SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${DB_ROOT_PASSWORD}') ;
-DROP DATABASE IF EXISTS test ;
-FLUSH PRIVILEGES ;
+	if [ ! -f "$temp_file" ]; then
+		return 1
+	fi
+
+	cat << EOF > $temp_file
+
+	USE mysql;
+	FLUSH PRIVILEGES ;
+	GRANT ALL ON *.* TO 'root'@'localhost' identified by '${DB_ROOT_PASSWORD}' WITH GRANT OPTION ;
+	SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${DB_ROOT_PASSWORD}') ;
+	DROP DATABASE IF EXISTS test ;
+	FLUSH PRIVILEGES ;
 
 EOF
 
-if [ "${DB_TITLE}" != "" ]; then
 
-	echo "[i] AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-	echo "[i] Creating data base ${DB_TITLE}..."
-	echo "[i] with character set: 'utf8' and collation: 'utf8_general_ci'"
+	if [ "${DB_TITLE}" != "" ]; then
 
-	# Create database
-	echo "CREATE DATABASE IF NOT EXISTS \`${DB_TITLE}\` CHARACTER SET utf8 COLLATE utf8_general_ci;" >> $temp_file
+		echo "[i] Creating data base ${DB_TITLE}..."
+		echo "[i] with character set: 'utf8' and collation: 'utf8_general_ci'"
 
-	# Create admin if not exist
-	if [ -n "${DB_ADMIN_NAME}" ]; then
-		if ! mysql -u root -e "SELECT 1 FROM mysql.user WHERE user = '${DB_ADMIN_NAME}'" | grep -q 1; then
-			echo "[i] Creating user: ${DB_ADMIN_NAME}..."
-			echo "CREATE USER '${DB_ADMIN_NAME}'@'localhost' IDENTIFIED BY '${DB_ADMIN_PASSWORD}';" >> $temp_file
-			echo "GRANT ALL ON \`${DB_TITLE}\`.* to '${DB_ADMIN_NAME}'@'localhost';" >> $temp_file
-		else
-			echo "[i] User '${DB_ADMIN_NAME}' already exists in database."
+		# Create database
+		echo "CREATE DATABASE IF NOT EXISTS \`${DB_TITLE}\` CHARACTER SET utf8 COLLATE utf8_general_ci;" >> $temp_file
+
+		# Create admin if not exist
+
+		if [ "${DB_ADMIN_NAME}" != "" ]; then
+			if ! mysql -u root -p"${DB_ROOT_PASSWORD}" -e "SELECT 1 FROM mysql.user WHERE user = '${DB_ADMIN_NAME}'" | grep -q 1; then
+				echo "[i] Creating user: ${DB_ADMIN_NAME}..."
+				echo "CREATE USER '${DB_ADMIN_NAME}'@'localhost' IDENTIFIED BY '${DB_ADMIN_PASSWORD}';" >> $temp_file
+				echo "GRANT ALL ON \`${DB_TITLE}\`.* to '${DB_ADMIN_NAME}'@'localhost';" >> $temp_file
+			else
+				echo "[i] User '${DB_ADMIN_NAME}' already exists in database."
+			fi
 		fi
-	fi
 
-	# Create admin if not exist
-	if [ -n "${DB_USER_NAME}" ]; then
-		if ! mysql -u root -e "SELECT 1 FROM mysql.user WHERE user = '${DB_USER_NAME}'" | grep -q 1; then
-			echo "[i] Creating user: ${DB_USER_NAME}..."
-			echo "CREATE USER '${DB_USER_NAME}'@'localhost' IDENTIFIED BY '${DB_USER_PASSWORD}';" >> $temp_file
-			echo "GRANT ALL ON \`${DB_TITLE}\`.* to '${DB_USER_NAME}'@'localhost';" >> $temp_file
-		else
-			echo "[i] User '${DB_USER_NAME}' already exists in database."
+		# Create admin if not exist
+		if [ "${DB_USER_NAME}" != "" ]; then
+			if ! mysql -u root -p"${DB_ROOT_PASSWORD}" -e "SELECT 1 FROM mysql.user WHERE user = '${DB_USER_NAME}'" | grep -q 1; then
+				echo "[i] Creating user: ${DB_USER_NAME}..."
+				echo "CREATE USER '${DB_USER_NAME}'@'localhost' IDENTIFIED BY '${DB_USER_PASSWORD}';" >> $temp_file
+				echo "GRANT ALL ON \`${DB_TITLE}\`.* to '${DB_USER_NAME}'@'localhost';" >> $temp_file
+			else
+				echo "[i] User '${DB_USER_NAME}' already exists in database."
+			fi
 		fi
+
+		/usr/bin/mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < $temp_file
+		rm -f $temp_file
+
+		echo
+		echo 'MySQL init process done. Ready for start up.'
+		echo
 	fi
-
-	/usr/bin/mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < $temp_file
-	rm -f $temp_file
-
-	echo
-	echo 'MySQL init process done. Ready for start up.'
-	echo
+else
+	echo "[i] MySQL directory already present, skipping creation."
+	chown -R mysql:mysql /var/lib/mysql
 fi
+
+exec	/usr/bin/mysqld --user=mysql --console --skip-name-resolve --skip-networking=0
