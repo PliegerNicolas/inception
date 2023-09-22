@@ -15,8 +15,7 @@ FROM	alpine:3.18.3
 # Install dependencies
 RUN	apk update && apk upgrade && apk add --no-cache \
 		mariadb \
-		mariadb-client \
-		sed && \
+		mariadb-client && \
 	rm -f /var/cache/apk/*
 
 # Setup mariaDB
@@ -27,17 +26,12 @@ RUN	apk update && apk upgrade && apk add --no-cache \
 # 5. rm the generator file but keep the initialize_*.sh file
 # 6. rm and purge sed dependencie
 RUN	mkdir -p /etc/scripts && \
-	chmod -R 755 /etc/scripts && \
+	chmod -R 755 /etc/scripts
 
-COPY	./conf/initialize_mariadb.sh.template /etc/scripts/
-COPY	./tools/generate_initialize_mariadb.sh /etc/scripts/
+COPY	./tools/initialize_mariadb.sh /etc/scripts/
 
-RUN	chmod +x /etc/scripts/generate_initialize_mariadb.sh && \
-	sh /etc/scripts/generate_initialize_mariadb.sh && \
-	chmod +x /etc/scripts/initialize_mariadb.sh && \
-	sh /etc/scripts/initialize_mariadb.sh && \
-	rm -rf /etc/scripts/generate_initialize_mariadb.sh && \
-	apk del --purge sed
+RUN	chmod +x /etc/scripts/initialize_mariadb.sh && \
+	sh /etc/scripts/initialize_mariadb.sh
 
 # Expose port 3006 (default mariadb port = 3306)
 EXPOSE	3306
