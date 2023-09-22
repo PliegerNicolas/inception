@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 17:32:44 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/22 21:01:35 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/23 01:17:37 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -33,12 +33,11 @@ RUN	apk update && apk upgrade && apk add --no-cache \
 RUN	mkdir -p /etc/scripts && \
 	chmod -R 755 /etc/scripts
 COPY	./tools/initialize_mariadb.sh /etc/scripts/
-RUN	chmod +x /etc/scripts/initialize_mariadb.sh && \
-	sh /etc/scripts/initialize_mariadb.sh
-
-ENTRYPOINT ["sh", "/etc/scripts/initialize_mariadb.sh"]
+RUN	chmod +x /etc/scripts/initialize_mariadb.sh
+	#sh /etc/scripts/initialize_mariadb.sh
 
 # Expose port 3006 (default mariadb port = 3306)
 EXPOSE	3306
 
-CMD ["usr/bin/mysqld", "--user=mysql", "--console", "--skip-name-resolve", "--skip-networking=0"]
+CMD	["/etc/scripts/initialize_mariadb.sh"]
+#CMD ["usr/bin/mysqld", "--user=mysql", "--console", "--skip-name-resolve", "--skip-networking=0"]

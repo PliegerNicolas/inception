@@ -18,7 +18,7 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 
 	chown -R mysql:mysql /var/lib/mysql
 	# Initialize database
-	mysql_install_db --user=mysql --ldata=/var/lib/mysql >> /dev/null
+	mysql_install_db --user=mysql --ldata=/var/lib/mysql > /dev/null 2>&1
 
 	# Create temporary file to intialize database content
 	temp_file="/tmp/my_temp_file.$(date +%s)"
@@ -38,7 +38,6 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 	FLUSH PRIVILEGES ;
 
 EOF
-
 
 	if [ "${DB_TITLE}" != "" ]; then
 
@@ -60,7 +59,7 @@ EOF
 			fi
 		fi
 
-		# Create admin if not exist
+		# Create user if not exist
 		if [ "${DB_USER_NAME}" != "" ]; then
 			if ! mysql -u root -p"${DB_ROOT_PASSWORD}" -e "SELECT 1 FROM mysql.user WHERE user = '${DB_USER_NAME}'" | grep -q 1; then
 				echo "[i] Creating user: ${DB_USER_NAME}..."
@@ -73,14 +72,11 @@ EOF
 
 		/usr/bin/mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < $temp_file
 		rm -f $temp_file
-
-		echo
 		echo 'MySQL init process done. Ready for start up.'
-		echo
 	fi
 else
 	echo "[i] MySQL directory already present, skipping creation."
 	chown -R mysql:mysql /var/lib/mysql
 fi
 
-exec	/usr/bin/mysqld --user=mysql --console --skip-name-resolve --skip-networking=0
+exec	/usr/bin/mysqld --user=mysql --console --skip-name-resolve --skip-networking=0 > /dev/null 2>&1
