@@ -54,7 +54,7 @@ To setup a new local `domain name` you can go to ...
 ```sudo nano /etc/hosts```
 
 And complete the file as this :     
-`${name}` is not available in `/etc/hosts` and should be `hard-coded`.
+`${USER}` is not available in `/etc/hosts` and should be `hard-coded`.
 
 ```
 # This file describes a number of hostname-to-address
@@ -67,7 +67,7 @@ And complete the file as this :
 # IP-Address  Full-Qualified-Hostname  Short-Hostname
 
 127.0.0.1       localhost
-127.0.0.1       ${NAME}.42.fr www.${NAME}.42.fr
+127.0.0.1       ${USER}.42.fr www.${USER}.42.fr
 
 # special IPv6 addresses
 ::1             localhost ip6-localhost ip6-loopback
