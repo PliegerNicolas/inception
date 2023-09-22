@@ -19,7 +19,9 @@ ARG	CERTS_
 # Install dependencies
 RUN	apk update && apk upgrade && apk add --no-cache \
 		nginx \
-		openssl
+		openssl \
+		sed && \
+	rm -f /var/cache/apk/*
 
 # Generate a self signed SSL certificat and key
 RUN	mkdir -p ${CERTS_} && \
@@ -34,13 +36,19 @@ RUN	mkdir -p ${CERTS_} && \
 # 3. copy nginx.config.template and generate_nginx_config.sh.
 # 4. modify permissions on .sh file and execute it.
 # 5. delete generate_conf_file foldler and remove sed dependency.
-RUN	mkdir -p /etc/nginx/generate_conf_file
-RUN	apk update && apk upgrade && apk add --no-cache sed
+
+RUN	apk update && apk upgrade && apk add --no-cache \
+		sed && \
+	rm -f /var/cache/apk/* && \
+	mkdir -p /etc/nginx/generate_conf_file
+
 COPY	./tools/generate_nginx_config.sh /etc/nginx/generate_conf_file/
 COPY	./conf/nginx.config.template /etc/nginx/generate_conf_file/
-RUN	chmod +x /etc/nginx/generate_conf_file/generate_nginx_config.sh
-RUN	sh /etc/nginx/generate_conf_file/generate_nginx_config.sh
-RUN	rm -rf /etc/nginx/generate_conf_file && apk del --purge sed
+
+RUN	chmod +x /etc/nginx/generate_conf_file/generate_nginx_config.sh && \
+		sh /etc/nginx/generate_conf_file/generate_nginx_config.sh && \
+		rm -rf /etc/nginx/generate_conf_file && \
+		apk del --purge sed
 
 # Expose port 443 for HTTPS traffic
 EXPOSE	443

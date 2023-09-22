@@ -32,9 +32,10 @@ stop:
 re:
 	$(COMPOSE) -f $(COMPOSE_FILE) up -d --build
 
-clean:	down
-
 prune:
 	docker image prune -af
 
-.PHONY: up down start stop re clean prune
+clean:	down prune
+
+
+.PHONY: up down start stop re prune clean
