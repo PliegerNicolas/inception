@@ -94,8 +94,8 @@ mkdir -p data/wordpress
 ## Environnement file (.env)
 
 ```
-NAME=${USER}
-DOMAIN_NAME=${NAME}.42.fr
+APP_USER=${USER}
+DOMAIN_NAME=${APP_USER}.42.fr
 
 # certificates
 CERTS_=/etc/nginx/ssl/certificats
@@ -105,10 +105,11 @@ DB_TITLE=wordpress_db
 DB_ROOT_PASSWORD=RootPassword123
 
 # USER
-DB_USER_NAME=${NAME}
+DB_USER_NAME=${APP_USER}
 DB_USER_PASSWORD=Password123
 
 # ADMIN
 DB_ADMIN_NAME=admin
 DB_ADMIN_PASSWORD=AdminPassword123
+
 ```
