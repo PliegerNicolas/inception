@@ -30,12 +30,11 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 
 	cat << EOF > $temp_file
 
-	USE mysql;
-	FLUSH PRIVILEGES ;
-	GRANT ALL ON *.* TO 'root'@'localhost' identified by '${DB_ROOT_PASSWORD}' WITH GRANT OPTION ;
-	SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${DB_ROOT_PASSWORD}') ;
-	DROP DATABASE IF EXISTS test ;
-	FLUSH PRIVILEGES ;
+USE mysql;
+FLUSH PRIVILEGES ;
+GRANT ALL ON *.* TO 'root'@'localhost' identified by '${DB_ROOT_PASSWORD}' WITH GRANT OPTION ;
+DROP DATABASE IF EXISTS test ;
+FLUSH PRIVILEGES ;
 
 EOF
 
@@ -54,6 +53,7 @@ EOF
 				echo "[i] Creating user: ${DB_ADMIN_NAME}..."
 				echo "CREATE USER '${DB_ADMIN_NAME}'@'localhost' IDENTIFIED BY '${DB_ADMIN_PASSWORD}';" >> $temp_file
 				echo "GRANT ALL ON \`${DB_TITLE}\`.* to '${DB_ADMIN_NAME}'@'localhost';" >> $temp_file
+				echo "FLUSH PRIVILEGES ;"
 			else
 				echo "[i] User '${DB_ADMIN_NAME}' already exists in database."
 			fi
@@ -65,6 +65,7 @@ EOF
 				echo "[i] Creating user: ${DB_USER_NAME}..."
 				echo "CREATE USER '${DB_USER_NAME}'@'localhost' IDENTIFIED BY '${DB_USER_PASSWORD}';" >> $temp_file
 				echo "GRANT ALL ON \`${DB_TITLE}\`.* to '${DB_USER_NAME}'@'localhost';" >> $temp_file
+				echo "FLUSH PRIVILEGES ;"
 			else
 				echo "[i] User '${DB_USER_NAME}' already exists in database."
 			fi

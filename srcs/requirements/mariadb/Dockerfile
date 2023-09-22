@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 17:32:44 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/23 01:17:37 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/23 01:28:10 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -35,9 +35,9 @@ RUN	mkdir -p /etc/scripts && \
 COPY	./tools/initialize_mariadb.sh /etc/scripts/
 RUN	chmod +x /etc/scripts/initialize_mariadb.sh
 	#sh /etc/scripts/initialize_mariadb.sh
+ENTRYPOINT	["/etc/scripts/initialize_mariadb.sh"]
 
 # Expose port 3006 (default mariadb port = 3306)
 EXPOSE	3306
 
-CMD	["/etc/scripts/initialize_mariadb.sh"]
-#CMD ["usr/bin/mysqld", "--user=mysql", "--console", "--skip-name-resolve", "--skip-networking=0"]
+CMD	["usr/bin/mysqld", "--user=mysql", "--console", "--skip-name-resolve", "--skip-networking=0"]
