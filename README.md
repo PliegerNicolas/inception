@@ -102,6 +102,8 @@ CERTS_=/etc/nginx/ssl/certificats
 
 # MYSQL SETUP
 DB_TITLE=wordpress_db
+DB_PREFIX=wp_
+DB_HOST=localhost
 DB_ROOT_PASSWORD=RootPassword123
 
 # USER
@@ -109,7 +111,6 @@ DB_USER_NAME=${APP_USER}
 DB_USER_PASSWORD=Password123
 
 # ADMIN
-DB_ADMIN_NAME=admin
+DB_ADMIN_NAME=amin
 DB_ADMIN_PASSWORD=AdminPassword123
-
 ```

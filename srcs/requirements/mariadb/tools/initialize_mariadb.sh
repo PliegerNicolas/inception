@@ -32,7 +32,7 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 
 USE mysql;
 FLUSH PRIVILEGES ;
-GRANT ALL ON *.* TO 'root'@'localhost' identified by '${DB_ROOT_PASSWORD}' WITH GRANT OPTION ;
+GRANT ALL ON *.* TO 'root'@'${DB_HOST}' identified by '${DB_ROOT_PASSWORD}' WITH GRANT OPTION ;
 DROP DATABASE IF EXISTS test ;
 FLUSH PRIVILEGES ;
 
@@ -51,8 +51,8 @@ EOF
 		if [ "${DB_ADMIN_NAME}" != "" ]; then
 			if ! mysql -u root -p"${DB_ROOT_PASSWORD}" -e "SELECT 1 FROM mysql.user WHERE user = '${DB_ADMIN_NAME}'" | grep -q 1; then
 				echo "[i] Creating user: ${DB_ADMIN_NAME}..."
-				echo "CREATE USER '${DB_ADMIN_NAME}'@'localhost' IDENTIFIED BY '${DB_ADMIN_PASSWORD}';" >> $temp_file
-				echo "GRANT ALL ON \`${DB_TITLE}\`.* to '${DB_ADMIN_NAME}'@'localhost';" >> $temp_file
+				echo "CREATE USER '${DB_ADMIN_NAME}'@'${DB_HOST}' IDENTIFIED BY '${DB_ADMIN_PASSWORD}';" >> $temp_file
+				echo "GRANT ALL ON \`${DB_TITLE}\`.* to '${DB_ADMIN_NAME}'@'${DB_HOST}';" >> $temp_file
 				echo "FLUSH PRIVILEGES ;"
 			else
 				echo "[i] User '${DB_ADMIN_NAME}' already exists in database."
@@ -63,8 +63,8 @@ EOF
 		if [ "${DB_USER_NAME}" != "" ]; then
 			if ! mysql -u root -p"${DB_ROOT_PASSWORD}" -e "SELECT 1 FROM mysql.user WHERE user = '${DB_USER_NAME}'" | grep -q 1; then
 				echo "[i] Creating user: ${DB_USER_NAME}..."
-				echo "CREATE USER '${DB_USER_NAME}'@'localhost' IDENTIFIED BY '${DB_USER_PASSWORD}';" >> $temp_file
-				echo "GRANT ALL ON \`${DB_TITLE}\`.* to '${DB_USER_NAME}'@'localhost';" >> $temp_file
+				echo "CREATE USER '${DB_USER_NAME}'@'${DB_HOST}' IDENTIFIED BY '${DB_USER_PASSWORD}';" >> $temp_file
+				echo "GRANT ALL ON \`${DB_TITLE}\`.* to '${DB_USER_NAME}'@'${DB_HOST}';" >> $temp_file
 				echo "FLUSH PRIVILEGES ;"
 			else
 				echo "[i] User '${DB_USER_NAME}' already exists in database."
