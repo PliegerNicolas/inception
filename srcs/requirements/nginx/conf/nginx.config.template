@@ -30,7 +30,7 @@ http
 		
 		# temp ?
 		root	/var/www/html;
-		index	index.html;
+		index	index.php;
 
 		location /
 		{

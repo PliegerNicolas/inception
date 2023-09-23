@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/23 21:13:39 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/23 22:42:20 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/23 23:10:41 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -30,7 +30,8 @@ RUN	apk update && apk upgrade && apk add --no-cache \
 		php82-zip && \
 	rm -f /var/cache/apk/*
 
-COPY	./conf/php-fpm.conf /etc/php/php-fpm.conf
+# Add php-fpm configuration file.
+COPY	./conf/php-fpm.conf /etc/php82/php-fpm.conf
 
 # Copy temporarily in /tmp/. install_wordpress.sh will handle the move if necessary.
 COPY	./conf/wp-config.php /tmp/
