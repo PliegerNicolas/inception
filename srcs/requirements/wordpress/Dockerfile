@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/23 21:13:39 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/23 21:16:09 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/23 22:42:20 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -22,8 +22,31 @@ ARG	DB_ADMIN_PASSWORD
 
 # Install dependencies
 RUN	apk update && apk upgrade && apk add --no-cache \
-		php82 && \
+		php82-fpm \
+		php82-mysqli \
+		php82-mbstring \
+		php82-xml \
+		php82-curl \
+		php82-zip && \
 	rm -f /var/cache/apk/*
+
+COPY	./conf/php-fpm.conf /etc/php/php-fpm.conf
+
+# Copy temporarily in /tmp/. install_wordpress.sh will handle the move if necessary.
+COPY	./conf/wp-config.php /tmp/
+
+# Copy WordPress installation script
+RUN	mkdir -p /etc/scripts && \
+	chmod -R 755 /etc/scripts
+COPY	./tools/install_wordpress.sh /etc/scripts/
+RUN	chmod +x /etc/scripts/install_wordpress.sh
+
+# Launch install_wordpress.sh script at container launch
+ENTRYPOINT	["/etc/scripts/install_wordpress.sh"]
+
+WORKDIR	/var/www/html
 
 # Expose port 9000.
 EXPOSE	9000
+
+CMD	["/usr/sbin/php-fpm82", "-F"]

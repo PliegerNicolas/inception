@@ -67,4 +67,4 @@ else
 	chown -R mysql:mysql /var/lib/mysql
 fi
 
-exec	/usr/bin/mysqld --user=mysql --console --skip-name-resolve --skip-networking=0 > /dev/null 2>&1
+exec "$@"
