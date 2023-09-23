@@ -46,19 +46,6 @@ EOF
 		# Create database
 		echo "CREATE DATABASE IF NOT EXISTS \`${DB_TITLE}\` CHARACTER SET utf8 COLLATE utf8_general_ci;" >> $temp_file
 
-		# Create admin if not exist
-
-		if [ "${DB_ADMIN_NAME}" != "" ]; then
-			if ! mysql -u root -p"${DB_ROOT_PASSWORD}" -e "SELECT 1 FROM mysql.user WHERE user = '${DB_ADMIN_NAME}'" | grep -q 1; then
-				echo "[i] Creating user: ${DB_ADMIN_NAME}..."
-				echo "CREATE USER '${DB_ADMIN_NAME}'@'${DB_HOST}' IDENTIFIED BY '${DB_ADMIN_PASSWORD}';" >> $temp_file
-				echo "GRANT ALL ON \`${DB_TITLE}\`.* to '${DB_ADMIN_NAME}'@'${DB_HOST}';" >> $temp_file
-				echo "FLUSH PRIVILEGES ;"
-			else
-				echo "[i] User '${DB_ADMIN_NAME}' already exists in database."
-			fi
-		fi
-
 		# Create user if not exist
 		if [ "${DB_USER_NAME}" != "" ]; then
 			if ! mysql -u root -p"${DB_ROOT_PASSWORD}" -e "SELECT 1 FROM mysql.user WHERE user = '${DB_USER_NAME}'" | grep -q 1; then

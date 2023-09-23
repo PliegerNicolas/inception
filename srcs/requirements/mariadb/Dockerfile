@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 17:32:44 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/23 21:13:54 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/23 21:20:26 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -14,12 +14,11 @@ FROM	alpine:3.18.3
 
 # Retrieve .env variables during image construction
 ARG	DB_TITLE
+ARG	DB_PREFIX
 ARG	DB_HOST
 ARG	DB_ROOT_PASSWORD
 ARG	DB_USER_NAME
 ARG	DB_USER_PASSWORD
-ARG	DB_ADMIN_NAME
-ARG	DB_ADMIN_PASSWORD
 
 # Install dependencies
 RUN	apk update && apk upgrade && apk add --no-cache \
