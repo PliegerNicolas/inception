@@ -27,24 +27,14 @@ http
 
 		# SSL protocols
 		ssl_protocols			TLSv1.2 TLSv1.3;
-		
-		# temp ?
-		root	/var/www/html;
-		index	index.php;
 
 		location /
 		{
-			try_files $uri $uri/ =404;
+			proxy_pass http://wordpress:9000;
+			proxy_set_header Host $host;
+			proxy_set_header X-Real-IP $remote_addr;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+			proxy_set_header X-Forwarded-Proto $scheme;
 		}
-
-#		location /
-#		{
-#			# Connect to WordPress on port 8080
-#			proxy_pass				http://wordpress:9000;
-#		    	proxy_set_header Host			$host;
-#	    		proxy_set_header X-Real-IP		$remote_addr;
-#	    		proxy_set_header X-Forwarded-For	$proxy_add_x_forwarded_for;
-#	    		proxy_set_header X-Forwarded-Proto	$scheme;
-#		}
 	}
 }

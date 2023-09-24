@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/23 21:13:39 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/23 23:10:41 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/24 14:27:47 by nplieger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -30,8 +30,14 @@ RUN	apk update && apk upgrade && apk add --no-cache \
 		php82-zip && \
 	rm -f /var/cache/apk/*
 
+# Add folder for php82 run-time files.
+RUN	mkdir -p /run/php
+
+# Add www-data to group www-data
+RUN	adduser -S -D -G www-data www-data
+
 # Add php-fpm configuration file.
-COPY	./conf/php-fpm.conf /etc/php82/php-fpm.conf
+COPY	./conf/www.conf /etc/php-fpm.d/www.conf
 
 # Copy temporarily in /tmp/. install_wordpress.sh will handle the move if necessary.
 COPY	./conf/wp-config.php /tmp/
