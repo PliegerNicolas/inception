@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/23 21:13:39 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/24 14:27:47 by nplieger         ###   ########.fr        #
+#    Updated: 2023/09/24 14:57:51 by nplieger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -37,7 +37,7 @@ RUN	mkdir -p /run/php
 RUN	adduser -S -D -G www-data www-data
 
 # Add php-fpm configuration file.
-COPY	./conf/www.conf /etc/php-fpm.d/www.conf
+COPY	./conf/www.conf /etc/php82/php-fpm.d/www.conf
 
 # Copy temporarily in /tmp/. install_wordpress.sh will handle the move if necessary.
 COPY	./conf/wp-config.php /tmp/
