@@ -14,7 +14,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 else
 
 	echo "[i] Wordpress already downloaded"
-	rm -rf ~/tmp/wp-config.php
+	rm -rf /tmp/wp-config.php
 
 fi
 
