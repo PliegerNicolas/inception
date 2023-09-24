@@ -29,7 +29,7 @@ define( 'DB_USER', getenv('DB_USER_NAME') ?: 'root' );
 define( 'DB_PASSWORD', getenv('DB_USER_PASSWORD') ?: 'password' );
 
 /** Database hostname */
-define( 'DB_HOST', getenv('DB_HOST') . ':9000' ?: 'localhost:9000' );
+define( 'DB_HOST', getenv('DB_HOST') . ':3306' ?: 'localhost:3306' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -79,7 +79,7 @@ $table_prefix = getenv('DB_PREFIX') ?: 'wp_';
  *
  * @link https://wordpress.org/documentation/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', false );
+define( 'WP_DEBUG', true );
 
 /* Add any custom values between this line and the "stop editing" line. */
 

@@ -6,31 +6,51 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 14:46:20 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/24 13:32:53 by nplieger         ###   ########.fr        #
+#    Updated: 2023/09/24 21:14:12 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Latest version as of 21 september 2023
 version: '3.8'
 
+# Networks
+networks:
+  inception:
+    driver: bridge
+
+# Volumes
+volumes:
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/${APP_USER}/data/wordpress
+      o: bind
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/${APP_USER}/data/mysql
+      o: bind
+
 # Services
 services:
 
-  nginx:
-    container_name: nginx
-    build:
-      context: ./requirements/nginx
-      args:
-        DOMAIN_NAME: ${DOMAIN_NAME}
-        CERTS_: ${CERTS_}
-    restart: unless-stopped
-    env_file:
-      - .env
-    ports:
-      - '443:443'
-    volumes:
-      - wordpress_data:/var/www/html
-    networks:
-      - inception
+  #  nginx:
+  #    container_name: nginx
+  #    build:
+  #      context: ./requirements/nginx
+  #      args:
+  #        DOMAIN_NAME: ${DOMAIN_NAME}
+  #        CERTS_: ${CERTS_}
+  #    restart: unless-stopped
+  #    env_file:
+  #      - .env
+  #    ports:
+  #      - '443:443'
+  #    networks:
+  #      - inception
+  #    depends_on:
+  #      - wordpress
 
   mariadb:
     container_name: mariadb
@@ -59,28 +79,10 @@ services:
     env_file:
       - .env
     volumes:
-      - wordpress_data:/var/www/html/wordpress
+      - wordpress_data:/var/www/html
     networks:
       - inception
     depends_on:
       - mariadb
-
-# Volumes
-volumes:
-  wordpress_data:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/${APP_USER}/data/wordpress
-      o: bind
-  mariadb_data:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/${APP_USER}/data/mysql
-      o: bind
-
-# Networks
-networks:
-  inception:
-    driver: bridge
+    ports:
+      - "9000:9000"
