@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/23 21:13:39 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/24 22:50:38 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/25 13:05:15 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -47,7 +47,7 @@ RUN	mkdir -p /etc/scripts && \
 COPY	./tools/install_wordpress.sh /etc/scripts/
 RUN	chmod +x /etc/scripts/install_wordpress.sh
 
-ENTRYPOINT	["/etc/scripts/install_wordpress.sh"]
+ENTRYPOINT	["sh", "/etc/scripts/install_wordpress.sh"]
 
 WORKDIR	"/var/www/html"
 

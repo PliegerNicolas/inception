@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 17:32:44 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/23 21:20:26 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/25 13:05:25 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -36,7 +36,7 @@ COPY	./tools/initialize_mariadb.sh /etc/scripts/
 RUN	chmod +x /etc/scripts/initialize_mariadb.sh
 
 # Set script executed at launch.
-ENTRYPOINT	["/etc/scripts/initialize_mariadb.sh"]
+ENTRYPOINT	["sh", "/etc/scripts/initialize_mariadb.sh"]
 
 # Expose port 3006 (default mariadb port = 3306)
 EXPOSE	3306

@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 14:46:20 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/24 21:14:12 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/25 12:04:25 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Latest version as of 21 september 2023
@@ -35,22 +35,21 @@ volumes:
 # Services
 services:
 
-  #  nginx:
-  #    container_name: nginx
-  #    build:
-  #      context: ./requirements/nginx
-  #      args:
-  #        DOMAIN_NAME: ${DOMAIN_NAME}
-  #        CERTS_: ${CERTS_}
-  #    restart: unless-stopped
-  #    env_file:
-  #      - .env
-  #    ports:
-  #      - '443:443'
-  #    networks:
-  #      - inception
-  #    depends_on:
-  #      - wordpress
+  nginx:
+    container_name: nginx
+    build:
+      context: ./requirements/nginx
+      args:
+        DOMAIN_NAME: ${DOMAIN_NAME}
+        CERTS_: ${CERTS_}
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+      - wordpress
 
   mariadb:
     container_name: mariadb
@@ -84,5 +83,3 @@ services:
       - inception
     depends_on:
       - mariadb
-    ports:
-      - "9000:9000"

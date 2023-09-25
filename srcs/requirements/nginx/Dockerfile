@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/09/21 14:56:02 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/22 19:41:50 by nicolas          ###   ########.fr        #
+#    Created: 2023/09/25 12:05:58 by nicolas           #+#    #+#              #
+#    Updated: 2023/09/25 13:05:05 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -19,8 +19,7 @@ ARG	CERTS_
 # Install dependencies
 RUN	apk update && apk upgrade && apk add --no-cache \
 		nginx \
-		openssl \
-		sed && \
+		openssl && \
 	rm -f /var/cache/apk/*
 
 # Generate a self signed SSL certificat and key
@@ -30,27 +29,19 @@ RUN	mkdir -p ${CERTS_} && \
 		-out ${CERTS_}/${DOMAIN_NAME}.crt \
 		-subj "/C=FR/ST=Île De France/L=Paris/O=42School/CN=${DOMAIN_NAME}"
 
-# Generate and populate with .env variables 'nginx.conf'
-# 1. build temporary 'generate_conf_file' directory.
-# 2. install sed dependency.
-# 3. copy nginx.config.template and generate_nginx_config.sh.
-# 4. modify permissions on .sh file and execute it.
-# 5. delete generate_conf_file foldler and remove sed dependency.
+# Add configuration file
+RUN	rm -f /etc/nginx/http.d/default.conf
+COPY	./conf/wordpress.conf.template /etc/nginx/http.d/
 
-RUN	apk update && apk upgrade && apk add --no-cache \
-		sed && \
-	rm -f /var/cache/apk/* && \
-	mkdir -p /etc/nginx/generate_conf_file
+# Set up env variable substitution in configuration file
+RUN	mkdir -p /etc/scripts && \
+	chmod -R 755 /etc/scripts
+COPY	./tools/generate_wordpress_conf.sh /etc/scripts/
+RUN	chmod +x /etc/scripts/generate_wordpress_conf.sh
 
-COPY	./tools/generate_nginx_config.sh /etc/nginx/generate_conf_file/
-COPY	./conf/nginx.config.template /etc/nginx/generate_conf_file/
+ENTRYPOINT	["sh", "/etc/scripts/generate_wordpress_conf.sh"]
 
-RUN	chmod +x /etc/nginx/generate_conf_file/generate_nginx_config.sh && \
-		sh /etc/nginx/generate_conf_file/generate_nginx_config.sh && \
-		rm -rf /etc/nginx/generate_conf_file && \
-		apk del --purge sed
-
-# Expose port 443 for HTTPS traffic
+# Expose port 443 for HTTPS
 EXPOSE	443
 
 # Run NGINX. It runs as daemon in the background by default. We make it run in
