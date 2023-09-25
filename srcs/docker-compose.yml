@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 14:46:20 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/25 13:34:25 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/25 18:30:52 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Latest version as of 21 september 2023
@@ -49,9 +49,6 @@ services:
       - inception
     ports:
       - "443:443"
-    depends_on:
-      - mariadb
-      - wordpress
 
   mariadb:
     container_name: mariadb

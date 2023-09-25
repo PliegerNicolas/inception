@@ -6,11 +6,11 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 12:05:58 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/25 13:21:51 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/25 18:29:13 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
-FROM	alpine:3.18.3
+FROM	alpine:3.17.5
 
 # Retrieve .env variables during image construction
 ARG	DOMAIN_NAME

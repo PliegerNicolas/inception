@@ -6,11 +6,11 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/23 21:13:39 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/25 13:05:15 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/25 18:29:31 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
-FROM	alpine:3.18.3
+FROM	alpine:3.17.5
 
 # Retrieve .env variables during image construction
 ARG	DB_TITLE
@@ -22,13 +22,13 @@ ARG	DB_USER_PASSWORD
 
 # Install dependencies
 RUN	apk update && apk upgrade && apk add --no-cache \
-		php82 \
-		php82-fpm \
-		php82-mysqli \
-		php82-mbstring \
-		php82-xml \
-		php82-curl \
-		php82-zip && \
+		php81 \
+		php81-fpm \
+		php81-mysqli \
+		php81-mbstring \
+		php81-xml \
+		php81-curl \
+		php81-zip && \
 	rm -f /var/cache/apk/*
 
 # Setup php-fpm run-time folder
@@ -55,4 +55,4 @@ WORKDIR	"/var/www/html"
 EXPOSE	9000
 
 # Start PHP-FPM
-CMD	["php-fpm82", "-F"]
+CMD	["php-fpm81", "-F"]
