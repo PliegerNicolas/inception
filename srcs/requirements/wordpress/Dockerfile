@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/23 21:13:39 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/25 18:29:31 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/25 19:07:26 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -36,7 +36,7 @@ RUN	mkdir -p /var/run/php-fpm/ && \
 	chmod 755 /var/run/php-fpm/
 
 #Set up php-fpm configuration
-COPY	./conf/php-fpm.conf /etc/php82/
+COPY	./conf/php-fpm.conf /etc/php81/
 RUN	mkdir -p /var/log/php-fpm && \
 	adduser -S -G www-data www-data
 
