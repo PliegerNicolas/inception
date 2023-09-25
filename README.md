@@ -103,12 +103,11 @@ APP_USER=${USER}
 DOMAIN_NAME=${APP_USER}.42.fr
 
 # certificates
-CERTS_=/etc/nginx/ssl/certificats
+CERTS_=/etc/nginx/ssl/certificates
 
 # MYSQL SETUP
-DB_TITLE=wordpress_db
-DB_PREFIX=wp_
-DB_HOST=localhost
+DB_TITLE=db_wordpress
+DB_HOST=mariadb
 DB_ROOT_PASSWORD=RootPassword123
 
 # USER
