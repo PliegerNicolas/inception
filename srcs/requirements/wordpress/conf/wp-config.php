@@ -22,7 +22,7 @@ $database_name = getenv('DB_TITLE') ?: 'db_wordpress';
 $database_user = getenv('DB_USER_NAME') ?: 'root';
 $database_password = getenv('DB_USER_PASSWORD') ?: 'password';
 $database_host = getenv('DB_HOST') ?: 'mariadb';
-$database_port = '3306'
+$database_port = '3306';
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
