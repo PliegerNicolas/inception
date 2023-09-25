@@ -3,6 +3,11 @@
 
 This project aims to broaden my knowledge of system administration by using Docker.
 
+## Dependencies
+
+1. You need `Docker` and `docker compose`. You can figure out how to install it [here](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository).
+2. You need make. You can download it with `apt update && apt install make` in Ubuntu. Check out your current package manager.
+
 ## Subject
 
 - A `Makefile` should exist to facilitate application launch.
