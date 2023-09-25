@@ -10,12 +10,13 @@ server
 
 	ssl_protocols			TLSv1.2 TLSv1.3;
 
-	root	/var/www/html/;
-	index	index.php;
+	root		/var/www/html/;
+	index		index.php;
+	set $index	index.php;
 
 	location /
 	{
-		try_files $uri $uri/ index.php?$args;
+		try_files $uri $uri/ $index?$args;
 	}
 
 	location ~ \.php$
