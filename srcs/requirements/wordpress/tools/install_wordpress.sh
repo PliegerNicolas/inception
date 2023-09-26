@@ -21,6 +21,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	chown www-data:www-data /var/www/html/wp-config.php
 
 	echo "[i] Remove sed and template."
+	apk delete sed
 	rm -f /etc/wp-config.php.template
 
 else
