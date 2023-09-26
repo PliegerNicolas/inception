@@ -10,34 +10,56 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME			:=		inception
+# **************************************************************************** #
+# *				   VARIABLES				     * #
+# **************************************************************************** #
 
+NAME			:=		inception
 COMPOSE			:=		docker compose -p $(NAME)
 COMPOSE_FILE		:=		./srcs/docker-compose.yml
+
+# **************************************************************************** #
+# *				    DEFINES				     * #
+# **************************************************************************** #
+
+define build_volumes
+	@echo "[i] Building volume folders if needed."
+	@mkdir -p ~/data/wordpress
+	@mkdir -p ~/data/mysql
+endef
+
+# **************************************************************************** #
+# *				     RULES				     * #
+# **************************************************************************** #
 
 all:	up
 
 up:
-	$(COMPOSE) -f $(COMPOSE_FILE) up -d --build
+	@$(call build_volumes)
+	@$(COMPOSE) -f $(COMPOSE_FILE) up -d --build
 
 down:
-	$(COMPOSE) -f $(COMPOSE_FILE) down --volumes --rmi local
+	@$(COMPOSE) -f $(COMPOSE_FILE) down --volumes --rmi local
 
 start:
-	$(COMPOSE) -f $(COMPOSE_FILE) start
+	@$(call build_volumes)
+	@$(COMPOSE) -f $(COMPOSE_FILE) start
 
 stop:
-	$(COMPOSE) -f $(COMPOSE_FILE) stop
+	@$(COMPOSE) -f $(COMPOSE_FILE) stop
 
 re:
-	$(COMPOSE) -f $(COMPOSE_FILE) up -d --build
+	@$(call build_volumes)
+	@$(COMPOSE) -f $(COMPOSE_FILE) up -d --build
 
 prune:
-	docker image prune -af
+	@echo "[i] Prune all images."
+	@docker image prune -af
 
 clean:	down prune
 
 system_prune:
-	docker system prune -a
+	@echo "[i] Prune system images."
+	@docker system prune -a
 
 .PHONY: up down start stop re prune clean system_prune
