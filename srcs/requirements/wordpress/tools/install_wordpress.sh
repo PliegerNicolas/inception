@@ -8,8 +8,9 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	tar -xzvf wordpress.tar.gz -C /var/www/html/ --strip-components=1;
 	rm wordpress.tar.gz;
 
-	echo "[i] Adding sed."
+	echo "[i] Install sed."
 	apk add --no-cache sed
+
 	echo "[i] Generating /var/www/html/wp-config.php file."
 	cat /tmp/wp-config.php.template |
 		sed -e "s#\${DB_TITLE}#${DB_TITLE}#g" \
@@ -18,20 +19,25 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	  		-e "s#\${DB_HOST}#${DB_HOST}#g" \
 		> /var/www/html/wp-config.php
 
-	chown www-data:www-data /var/www/html/wp-config.php
-
-	echo "[i] Remove sed and template."
-	apk delete sed
-	rm -f /etc/wp-config.php.template
+	echo "[i] Remove sed."
+	apk del sed
 
 else
 
 	echo "[i] Wordpress already downloaded"
-	echo "[i] Remove sed and template."
-	rm -rf /tmp/wp-config.php.template
 
 fi
 
-chown -R www-data:www-data /var/www/html/
+echo "[i] Remove wp-config.php.template"
+rm -rf /tmp/wp-config.php.template
+
+echo "[i] Create www-data user/group"
+adduser -S -D -H -G www-data -s /sbin/nologin www-data
+
+echo "[i] Set /var/www/html/ property and rights."
+chown -R www-data:www-data /var/www/html/*
+chown -R 755 /var/www/html/*
+mkdir -p /run/php/
+touch /run/php/php81-fpm.pid
 
 exec "$@"

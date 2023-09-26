@@ -29,14 +29,8 @@ RUN	apk update && apk upgrade && apk add --no-cache \
 		php81-zip && \
 	rm -f /var/cache/apk/*
 
-# Setup php-fpm run-time folder
-RUN	mkdir -p /var/run/php-fpm/ && \
-	chmod 755 /var/run/php-fpm/
-
 #Set up php-fpm configuration
-COPY	./conf/php-fpm.conf /etc/php81/
-RUN	mkdir -p /var/log/php-fpm && \
-	adduser -S -G www-data www-data
+COPY	./conf/www.conf /etc/php81/php-fpm.d/
 
 # Set up WordPress configuration
 COPY	./conf/wp-config.php.template /tmp/

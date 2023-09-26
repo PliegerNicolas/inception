@@ -29,7 +29,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/${APP_USER}/data/mysql
+      device: /home/${APP_USER}/data/mariadb
       o: bind
 
 # Services

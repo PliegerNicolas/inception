@@ -23,9 +23,17 @@ COMPOSE_FILE		:=		./srcs/docker-compose.yml
 # **************************************************************************** #
 
 define build_volumes
-	@echo "[i] Building volume folders if needed."
-	@mkdir -p ~/data/wordpress
-	@mkdir -p ~/data/mysql
+
+	if [ ! -d ~/data/wordpress ]; then \
+		echo "[i] Building volume folder : ~/data/wordpress."; \
+		mkdir -p ~/data/wordpress; \
+	fi
+
+	if [ ! -d ~/data/mariadb ]; then \
+		echo "[i] Building volume folder : ~/data/mariadb."; \
+		mkdir -p ~/data/mariadb; \
+	fi
+
 endef
 
 # **************************************************************************** #
