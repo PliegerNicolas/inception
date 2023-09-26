@@ -18,27 +18,21 @@
  * @package WordPress
  */
 
-$database_name = getenv('DB_TITLE') ?: 'db_wordpress';
-$database_user = getenv('DB_USER_NAME') ?: 'root';
-$database_password = getenv('DB_USER_PASSWORD') ?: 'password';
-$database_host = getenv('DB_HOST') ?: 'mariadb';
-$database_port = '3306';
-
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', $database_name );
+define( 'DB_NAME', '${DB_TITLE}' );
 
 /** Database username */
-define( 'DB_USER', $database_user );
+define( 'DB_USER', '${DB_USER_NAME}' );
 
 /** Database password */
-define( 'DB_PASSWORD', $database_password );
+define( 'DB_PASSWORD', '${DB_USER_PASSWORD}' );
 
 /** Database hostname */
-define( 'DB_HOST', $database_host );
+define( 'DB_HOST', '${DB_HOST}' );
 
 /** Database port */
-define( 'DB_PORT', $database_port );
+define( 'DB_PORT', '3306' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -57,14 +51,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         'put your unique phrase here' );
-define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
-define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
-define( 'NONCE_KEY',        'put your unique phrase here' );
-define( 'AUTH_SALT',        'put your unique phrase here' );
-define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
-define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
-define( 'NONCE_SALT',       'put your unique phrase here' );
+define( 'AUTH_KEY',         'Iek3ncLYJ39ENOyRPoxzcY8KLQ9H3Twp' );
+define( 'SECURE_AUTH_KEY',  'Iek3ncLYJ39ENOyRPoxzcY8KLQ9H3Twp' );
+define( 'LOGGED_IN_KEY',    'Iek3ncLYJ39ENOyRPoxzcY8KLQ9H3Twp' );
+define( 'NONCE_KEY',        'Iek3ncLYJ39ENOyRPoxzcY8KLQ9H3Twp' );
+define( 'AUTH_SALT',        'Iek3ncLYJ39ENOyRPoxzcY8KLQ9H3Twp' );
+define( 'SECURE_AUTH_SALT', 'Iek3ncLYJ39ENOyRPoxzcY8KLQ9H3Twp' );
+define( 'LOGGED_IN_SALT',   'Iek3ncLYJ39ENOyRPoxzcY8KLQ9H3Twp' );
+define( 'NONCE_SALT',       'Iek3ncLYJ39ENOyRPoxzcY8KLQ9H3Twp' );
 
 /**#@-*/
 

@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/23 21:13:39 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/25 19:07:26 by nicolas          ###   ########.fr        #
+#    Updated: 2023/09/26 11:08:24 by nplieger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -14,11 +14,9 @@ FROM	alpine:3.17.5
 
 # Retrieve .env variables during image construction
 ARG	DB_TITLE
-ARG	DB_PREFIX
-ARG	DB_HOST
-ARG	DB_ROOT_PASSWORD
 ARG	DB_USER_NAME
 ARG	DB_USER_PASSWORD
+ARG	DB_HOST
 
 # Install dependencies
 RUN	apk update && apk upgrade && apk add --no-cache \
@@ -41,7 +39,7 @@ RUN	mkdir -p /var/log/php-fpm && \
 	adduser -S -G www-data www-data
 
 # Set up WordPress configuration
-COPY	./conf/wp-config.php /tmp/
+COPY	./conf/wp-config.php.template /tmp/
 RUN	mkdir -p /etc/scripts && \
 	chmod -R 755 /etc/scripts
 COPY	./tools/install_wordpress.sh /etc/scripts/

@@ -8,16 +8,23 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	tar -xzvf wordpress.tar.gz -C /var/www/html/ --strip-components=1;
 	rm wordpress.tar.gz;
 
-	echo "[i] Adding custom wp-config.php file."
-	mv /tmp/wp-config.php /var/www/html/
+	echo "[i] Generating /var/www/html/wp-config.php file"
+	cat /tmp/wp-config.php.template |
+		sed -e "s#\${DB_TITLE}#${DB_TITLE}#g" \
+	  		-e "s#\${DB_USER_NAME}#${DB_USER_NAME}#g" \
+	  		-e "s#\${DB_USER_PASSWORD}#${DB_USER_PASSWORD}#g" \
+	  		-e "s#\${DB_HOST}#${DB_HOST}#g" \
+		> /var/www/html/wp-config.php
+	rm -f /etc/wp-config.php.template
+	chown www-data:www-data /var/www/html/wp-config.php
 
 else
 
 	echo "[i] Wordpress already downloaded"
-	rm -rf /tmp/wp-config.php
+	rm -rf /tmp/wp-config.php.template
 
 fi
 
-chown -R root:root /var/www/html/
+chown -R www-data:www-data /var/www/html/
 
 exec "$@"
