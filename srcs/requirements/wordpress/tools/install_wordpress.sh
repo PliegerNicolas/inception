@@ -2,25 +2,36 @@
 
 if [ ! -f /var/www/html/wp-config.php ]; then
 
-	echo "[i] Installing WordPress..."
-	wget -O wordpress.tar.gz "https://wordpress.org/wordpress-6.3.1.tar.gz";
-	mkdir -p /var/www/html/
-	tar -xzvf wordpress.tar.gz -C /var/www/html/ --strip-components=1;
-	rm wordpress.tar.gz;
 
-	echo "[i] Install sed."
-	apk add --no-cache sed
+	echo "[i] Install WP-CLI..."
+	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+	chmod +x wp-cli.phar && \
+	mv wp-cli.phar /usr/local/bin/wp
 
-	echo "[i] Generating /var/www/html/wp-config.php file."
-	cat /tmp/wp-config.php.template |
-		sed -e "s#\${DB_TITLE}#${DB_TITLE}#g" \
-	  		-e "s#\${DB_USER_NAME}#${DB_USER_NAME}#g" \
-	  		-e "s#\${DB_USER_PASSWORD}#${DB_USER_PASSWORD}#g" \
-	  		-e "s#\${DB_HOST}#${DB_HOST}#g" \
-		> /var/www/html/wp-config.php
+	echo "[i] Download wordpress at /var/www/html path."
+	wp core download --path=/var/www/html --version=6.3.1 --locale=en_US
 
-	echo "[i] Remove sed."
-	apk del sed
+	echo "[i] Configure wp-config.php file."
+	wp config create --path=/var/www/html \
+		--dbname="${DB_TITLE}" \
+		--dbuser="${DB_USER_NAME}" \
+		--dbpass="${DB_USER_PASSWORD}" \
+		--dbhost="${DB_HOST}:3306"
+
+	echo "[i] Install wordpress website process with admin account."
+	wp core install --path=/var/www/html \
+		--url="${DOMAIN_NAME}" \
+		--title="${DOMAIN_NAME}" \
+		--admin_user="${DB_USER_NAME}" \
+		--admin_password="${DB_USER_PASSWORD}" \
+		--admin_email="${DB_USER_NAME}@gmail.com"
+
+	echo "[i] Add user account."
+	wp user create \
+		user \
+		user@gmail.com \
+		--user_pass="password" \
+		--role="subscriber"
 
 else
 
@@ -28,15 +39,14 @@ else
 
 fi
 
-echo "[i] Remove wp-config.php.template"
-rm -rf /tmp/wp-config.php.template
-
 echo "[i] Create www-data user/group"
 adduser -S -D -H -G www-data -s /sbin/nologin www-data
 
 echo "[i] Set /var/www/html/ property and rights."
-chown -R www-data:www-data /var/www/html/*
-chown -R 755 /var/www/html/*
+chown -R www-data:www-data /var/www/html
+chown -R 755 /var/www/html
+
+echo "[i] Build php81 run-time directory."
 mkdir -p /run/php/
 touch /run/php/php81-fpm.pid
 

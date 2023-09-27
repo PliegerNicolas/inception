@@ -20,8 +20,11 @@ ARG	DB_HOST
 
 # Install dependencies
 RUN	apk update && apk upgrade && apk add --no-cache \
+		curl \
+		mysql-client \
 		php81 \
 		php81-fpm \
+		php81-phar \
 		php81-mysqli \
 		php81-mbstring \
 		php81-xml \
@@ -33,9 +36,7 @@ RUN	apk update && apk upgrade && apk add --no-cache \
 COPY	./conf/www.conf /etc/php81/php-fpm.d/
 
 # Set up WordPress configuration
-COPY	./conf/wp-config.php.template /tmp/
-RUN	mkdir -p /etc/scripts && \
-	chmod -R 755 /etc/scripts
+RUN	mkdir -p /etc/scripts && chmod -R 755 /etc/scripts
 COPY	./tools/install_wordpress.sh /etc/scripts/
 RUN	chmod +x /etc/scripts/install_wordpress.sh
 
