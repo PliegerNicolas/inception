@@ -3,6 +3,8 @@
 
 This project aims to broaden my knowledge of system administration by using Docker.
 
+THIS PROJECT IS NOT FUNCTIONNAL NOR FINISHED.
+
 ## Dependencies
 
 1. You need `Docker` and `docker compose`. You can figure out how to install it [here](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository).
@@ -85,15 +87,6 @@ ff02::2         ip6-allrouters
 ff02::3         ip6-allhosts
 
 # End of file
-```
-
-You should also create the volume directories in your HOST machine :
-
-```
-cd ~
-mkdir -p data
-mkdir -p data/mysql
-mkdir -p data/wordpress
 ```
 
 ## Environnement file (.env)
