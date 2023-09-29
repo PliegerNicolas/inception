@@ -1,5 +1,13 @@
 #!/bin/sh
 
+# Wait for mariaDB ENTRYPOINT script to finish.
+until mysqladmin ping -h mariadb --silent; do
+	echo "Waiting for MariaDB to be ready..."
+	sleep 1
+done
+
+echo "[i] MariaDB is ready."
+
 if [ ! -f /var/www/html/wp-config.php ]; then
 
 
@@ -9,7 +17,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	mv wp-cli.phar /usr/local/bin/wp
 
 	echo "[i] Download wordpress at /var/www/html path."
-	wp core download --path=/var/www/html --version=6.3.1 --locale=en_US
+	wp core download --path=/var/www/html --version=6.3.1 --locale=fr_FR
 
 	echo "[i] Configure wp-config.php file."
 	wp config create --path=/var/www/html \
