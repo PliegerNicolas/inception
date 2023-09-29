@@ -41,7 +41,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 		--user_pass="password" \
 		--role="subscriber"
 
-	echo "[i] Install 'inspiro' WordPress theme."
+	echo "[i] Install 'bravada' WordPress theme."
 	wp theme install bravada --activate
 
 else
