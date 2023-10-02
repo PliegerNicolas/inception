@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 13:38:49 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/21 17:00:48 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/02 18:32:39 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,12 @@ COMPOSE_FILE		:=		./srcs/docker-compose.yml
 define build_volumes
 
 	if [ ! -d ~/data/wordpress ]; then \
-		echo "[i] Building volume folder : ~/data/wordpress."; \
+		echo "[i] Building volume folder : ${HOME}/data/wordpress."; \
 		mkdir -p ~/data/wordpress; \
 	fi
 
 	if [ ! -d ~/data/mariadb ]; then \
-		echo "[i] Building volume folder : ~/data/mariadb."; \
+		echo "[i] Building volume folder : ${HOME}/data/mariadb."; \
 		mkdir -p ~/data/mariadb; \
 	fi
 

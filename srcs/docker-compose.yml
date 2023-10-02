@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 14:46:20 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/26 11:03:59 by nplieger         ###   ########.fr        #
+#    Updated: 2023/10/02 18:34:04 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Latest version as of 21 september 2023
@@ -23,13 +23,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/${APP_USER}/data/wordpress
+      device: ${HOME}/data/wordpress
       o: bind
   mariadb_data:
     driver: local
     driver_opts:
       type: none
-      device: /home/${APP_USER}/data/mariadb
+      device: ${HOME}/data/mariadb
       o: bind
 
 # Services

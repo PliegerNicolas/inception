@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Wait for mariaDB ENTRYPOINT script to finish.
-until mysqladmin ping -h mariadb --silent; do
+until mysqladmin ping -h mariadb -u${DB_USER_NAME} -p${DB_USER_PASSWORD}; do
 	echo "Waiting for MariaDB to be ready..."
 	sleep 1
 done
