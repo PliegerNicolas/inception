@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/23 21:13:39 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/26 11:08:24 by nplieger         ###   ########.fr        #
+#    Updated: 2023/10/02 21:18:02 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -29,7 +29,16 @@ RUN	apk update && apk upgrade && apk add --no-cache \
 		php81-mbstring \
 		php81-xml \
 		php81-curl \
-		php81-zip && \
+		php81-zip \
+		php81-dom \
+		php81-exif \
+		php81-fileinfo \
+		php81-gd \
+		php81-pecl-imagick \
+		php81-iconv \
+		php81-intl \
+		php81-tokenizer \
+		php81-redis && \
 	rm -f /var/cache/apk/*
 
 #Set up php-fpm configuration

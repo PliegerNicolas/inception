@@ -41,8 +41,31 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 		--user_pass="password" \
 		--role="subscriber"
 
-	echo "[i] Install 'bravada' WordPress theme."
+	echo "[i] Inforce HTTPS/SSH on wordpress by default."
+	wp option update siteurl "https://${DOMAIN_NAME}"
+	wp option update home "https://${DOMAIN_NAME}"
+	wp config set FORCE_SSL_ADMIN true --raw
+
+	echo "[i] Install 'bravada' WordPress theme and delete some default ones."
 	wp theme install bravada --activate
+	wp theme delete twentytwentyone
+	wp theme delete twentytwentytwo
+
+	echo "[i] Uninstall inactive extensions"
+	wp plugin delete akismet hello
+
+	# BONUS : REDIS
+	echo "[i] Configure redis cache."
+
+	echo "[i] Add Redis variables to wp-conf.php."
+	wp config set WP_REDIS_HOST ${REDIS_HOST}
+	wp config set WP_REDIS_PORT 6379
+	wp config set WP_REDIS_DATABASE 0
+	wp config set WP_CACHE true
+
+	echo "[i] Install Redis plugin."
+	wp plugin install redis-cache --activate
+	wp plugin update --all
 
 else
 

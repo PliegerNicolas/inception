@@ -95,6 +95,10 @@ ff02::3         ip6-allhosts
 ## Environnement file (.env)
 
 ```
+# **************************************************************************** #
+# *                                 MANDATORY                                * #
+# **************************************************************************** #
+
 DOMAIN_NAME=${USER}.42.fr
 
 # certificates
@@ -108,4 +112,15 @@ DB_ROOT_PASSWORD=RootPassword123
 # USER
 DB_USER_NAME=${USER}
 DB_USER_PASSWORD=Password123
+
+# **************************************************************************** #
+# *                                   BONUS                                  * #
+# **************************************************************************** #
+
+# Redis
+REDIS_HOST=redis
+
+# FTP
+FTP_USER_NAME=${USER}
+FTP_USER_PASSWORD=Password123
 ```
