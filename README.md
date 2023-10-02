@@ -3,12 +3,15 @@
 
 This project aims to broaden my knowledge of system administration by using Docker.
 
-THIS PROJECT IS NOT FUNCTIONNAL NOR FINISHED.
+By using 'make' you should be able to deploy a functionnal wordpress website on https://localhost (and optionnally https://${USER].42.fr or https://www.${USER].42.fr).
 
-## Dependencies
+## Dependencies & necessities
 
 1. You need `Docker` and `docker compose`. You can figure out how to install it [here](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository).
 2. You need make. You can download it with `apt update && apt install make` in Ubuntu. Check out your current package manager.
+
+This project with create the ${HOME}/data folder for persistent memory storage (volumes). The HOME env variable should exist.
+This project will build based on the $USER env variable (domain name, wordpress user, mariadb user). The USER env variable should exist.
 
 ## Subject
 
@@ -22,7 +25,7 @@ THIS PROJECT IS NOT FUNCTIONNAL NOR FINISHED.
 - Only the penultimate debian or alpine images are permitted. I should build my own images from them. See [docker hub](https://hub.docker.com/).
 - The NGINX container should be the only entrypoint to my infrastructure via `port 443` (HTTPS).
 - MariaDB should have 2 users : administrator user and lambda user.
-- MariaDB and WordPress's content should be persistent and stored and host computer via `volumes` at `/home/${NAME}/data`.
+- MariaDB and WordPress's content should be persistent and stored and host computer via `volumes` at `${HOME}/data`.
 - On crash, the containers should restart.
 - The domain name must be `${name}.42.fr` (and `www.${name}.42.fr` optionnally).
 - The 'latest' tag is prohibited.
