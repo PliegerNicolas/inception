@@ -95,8 +95,7 @@ ff02::3         ip6-allhosts
 ## Environnement file (.env)
 
 ```
-APP_USER=${USER}
-DOMAIN_NAME=${APP_USER}.42.fr
+DOMAIN_NAME=${USER}.42.fr
 
 # certificates
 CERTS_=/etc/nginx/ssl/certificates
@@ -107,6 +106,6 @@ DB_HOST=mariadb
 DB_ROOT_PASSWORD=RootPassword123
 
 # USER
-DB_USER_NAME=${APP_USER}
+DB_USER_NAME=${USER}
 DB_USER_PASSWORD=Password123
 ```
