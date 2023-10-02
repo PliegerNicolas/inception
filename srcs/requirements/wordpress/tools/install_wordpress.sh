@@ -54,6 +54,9 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	echo "[i] Uninstall inactive extensions"
 	wp plugin delete akismet hello
 
+	echo "[i] Disable cron."
+	wp config set DISABLE_WP_CRON true
+
 	# BONUS : REDIS
 	echo "[i] Configure redis cache."
 
