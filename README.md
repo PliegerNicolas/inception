@@ -9,6 +9,7 @@ By using 'make' you should be able to deploy a functionnal wordpress website on 
 
 1. You need `Docker` and `docker compose`. You can figure out how to install it [here](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository).
 2. You need make. You can download it with `apt update && apt install make` in Ubuntu. Check out your current package manager.
+3. [optionnal] You need lftp if you want to connect via ftp to your wordpress website using SSL.
 
 This project with create the ${HOME}/data folder for persistent memory storage (volumes). The HOME env variable should exist.
 This project will build based on the $USER env variable (domain name, wordpress user, mariadb user). The USER env variable should exist.
