@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/02 18:59:38 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/03 17:24:54 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/03 17:51:56 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -36,5 +36,4 @@ ENTRYPOINT	["sh", "/etc/scripts/configure_vsftpd.sh"]
 EXPOSE 20 21
 
 # Start vsftpd
-CMD	["sleep", "infinity"]
-#CMD	["vsftpd", "/etc/vsftpd/vsftpd.conf"]
+CMD	["vsftpd", "/etc/vsftpd/vsftpd.conf"]

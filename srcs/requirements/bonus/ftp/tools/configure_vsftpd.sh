@@ -1,11 +1,7 @@
 #!/bin/sh
 
 echo "[i] Append conf.d inclusion to vsftpd.conf file."
-cat <<EOL >> /etc/vsftpd/vsftpd.conf
-
-# Include all configuration files from the conf.d directory
-include=/etc/vsftpd/conf.d/*.conf
-EOL
+cat /etc/vsftpd/conf.d/*.conf >> /etc/vsftpd/vsftpd.conf
 
 echo "[i] Create FTP user in non-interactive login mode."
 adduser ${FTP_USER_NAME} -s /bin/false ${FT_USER_NAME}
@@ -18,6 +14,6 @@ mkdir -p /var/www/html
 chown -R ${FTP_USER_NAME} /var/www/html
 
 echo "[i] Create vsftpd.userlist and add our FTP user to it."
-echo ${FTP_USR_NAME} > /etc/vsftpd.userlist &> /dev/null
+echo ${FTP_USR_NAME} > /etc/vsftpd/vsftpd.userlist &> /dev/null
 
 exec "$@"
