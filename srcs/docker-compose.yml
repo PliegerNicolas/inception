@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 14:46:20 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/02 20:53:43 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/03 16:58:41 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Latest version as of 21 september 2023
@@ -100,5 +100,17 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+    networks:
+      - inception
+
+  ftp:
+    container_name: ftp
+    build:
+      context: ./requirements/bonus/ftp
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - wordpress_data:/var/www/html
     networks:
       - inception
