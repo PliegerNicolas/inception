@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/23 21:13:39 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/03 13:52:16 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/04 00:47:10 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -42,7 +42,10 @@ RUN	apk update && apk upgrade && apk add --no-cache \
 		php81-redis && \
 	rm -f /var/cache/apk/*
 
-#Set up php-fpm configuration
+# Insert static website (index.html)
+COPY	./conf/index.html /tmp/
+
+# Set up php-fpm configuration
 COPY	./conf/www.conf /etc/php81/php-fpm.d/
 
 # Set up WordPress configuration

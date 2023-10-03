@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Wait for mariaDB ENTRYPOINT script to finish.
-until mysqladmin ping -h mariadb -u${DB_USER_NAME} -p${DB_USER_PASSWORD}; do
+until mysqladmin ping -h mariadb -u${DB_USER_NAME} -p${DB_USER_PASSWORD}i > /dev/null 2>&1; do
 	echo "[i]Waiting for MariaDB to be ready..."
 	sleep 2
 done
@@ -12,6 +12,8 @@ mkdir -p /var/www/html
 
 if [ ! -f /var/www/html/wp-config.php ]; then
 
+	echo "[i] Insert static website (index.html)."
+	mv /tmp/index.html /var/www/html/index.html
 
 	echo "[i] Install WP-CLI..."
 	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
