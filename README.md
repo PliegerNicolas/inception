@@ -3,7 +3,7 @@
 
 This project aims to broaden my knowledge of system administration by using Docker.
 
-By using 'make' you should be able to deploy a functionnal wordpress website on https://localhost (and optionally https://${USER].42.fr or https://www.${USER}.42.fr).
+By using 'make' you should be able to deploy a functionnal wordpress website on https://localhost (and optionally https://${USER}.42.fr or https://www.${USER}.42.fr).
 
 ## Dependencies & necessities
 
