@@ -43,8 +43,6 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 		--user_pass="password" \
 		--role="subscriber"
 
-	wp config set WP_DEBUG true --raw
-
 	echo "[i] Inforce HTTPS/SSH on wordpress by default."
 	wp option update siteurl "https://${DOMAIN_NAME}"
 	wp option update home "https://${DOMAIN_NAME}"
