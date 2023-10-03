@@ -71,6 +71,9 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	wp plugin install redis-cache --activate --version=2.4.4
 	wp plugin update --all
 
+	echo "[i] Enable Object Cache."
+	wp redis enable
+
 fi
 
 echo "[i] Create www-data user/group"
