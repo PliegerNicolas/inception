@@ -43,6 +43,8 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 		--user_pass="password" \
 		--role="subscriber"
 
+	wp config set WP_DEBUG true --raw
+
 	echo "[i] Inforce HTTPS/SSH on wordpress by default."
 	wp option update siteurl "https://${DOMAIN_NAME}"
 	wp option update home "https://${DOMAIN_NAME}"
@@ -56,7 +58,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	wp plugin delete akismet hello
 
 	echo "[i] Disable cron."
-	wp config set DISABLE_WP_CRON true
+	wp config set DISABLE_WP_CRON true --raw
 
 	# BONUS : REDIS
 	echo "[i] Configure redis cache."
@@ -65,15 +67,11 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	wp config set WP_REDIS_HOST ${REDIS_HOST}
 	wp config set WP_REDIS_PORT 6379
 	wp config set WP_REDIS_DATABASE 0
-	wp config set WP_CACHE true
+	wp config set WP_CACHE true --raw
 
 	echo "[i] Install Redis plugin."
-	wp plugin install redis-cache --activate
+	wp plugin install redis-cache --activate --version=2.4.4
 	wp plugin update --all
-
-else
-
-	echo "[i] Wordpress already downloaded"
 
 fi
 
