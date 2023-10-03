@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 14:46:20 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/03 16:58:41 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/03 18:24:37 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Latest version as of 21 september 2023
@@ -41,7 +41,7 @@ services:
       context: ./requirements/nginx
       args:
         DOMAIN_NAME: ${DOMAIN_NAME}
-        CERTS_: ${CERTS_}
+        NGINX_CERTS: ${NGINX_CERTS}
     restart: unless-stopped
     env_file:
       - .env
@@ -107,6 +107,9 @@ services:
     container_name: ftp
     build:
       context: ./requirements/bonus/ftp
+      args:
+        DOMAIN_NAME: ${DOMAIN_NAME}
+        FTP_CERTS: ${FTP_CERTS}
     restart: unless-stopped
     env_file:
       - .env

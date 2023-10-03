@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 12:05:58 by nicolas           #+#    #+#              #
-#    Updated: 2023/09/25 18:29:13 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/03 18:26:11 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -14,7 +14,20 @@ FROM	alpine:3.17.5
 
 # Retrieve .env variables during image construction
 ARG	DOMAIN_NAME
-ARG	CERTS_
+ARG	NGINX_CERTS
+
+RUN echo "${NGINX_CERTS}"
+RUN echo "${NGINX_CERTS}"
+RUN echo "${NGINX_CERTS}"
+RUN echo "${NGINX_CERTS}"
+RUN echo "${NGINX_CERTS}"
+RUN echo "${NGINX_CERTS}"
+RUN echo "${NGINX_CERTS}"
+RUN echo "${NGINX_CERTS}"
+RUN echo "${NGINX_CERTS}"
+RUN echo "${NGINX_CERTS}"
+RUN echo "${NGINX_CERTS}"
+RUN echo "${NGINX_CERTS}"
 
 # Install dependencies
 RUN	apk update && apk upgrade && apk add --no-cache \
@@ -23,10 +36,10 @@ RUN	apk update && apk upgrade && apk add --no-cache \
 	rm -f /var/cache/apk/*
 
 # Generate a self signed SSL certificat and key
-RUN	mkdir -p ${CERTS_} && \
+RUN	mkdir -p ${NGINX_CERTS} && \
 	openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-		-keyout ${CERTS_}/${DOMAIN_NAME}.key \
-		-out ${CERTS_}/${DOMAIN_NAME}.crt \
+		-keyout ${NGINX_CERTS}/${DOMAIN_NAME}.key \
+		-out ${NGINX_CERTS}/${DOMAIN_NAME}.crt \
 		-subj "/C=FR/ST=Île De France/L=Paris/O=42School/CN=${DOMAIN_NAME}"
 
 # Add configuration file

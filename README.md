@@ -102,7 +102,8 @@ ff02::3         ip6-allhosts
 DOMAIN_NAME=${USER}.42.fr
 
 # certificates
-CERTS_=/etc/nginx/ssl/certificates
+NGINX_CERTS=/etc/nginx/ssl/certificates
+FTP_CERTS=/etc/vsftpd/ssl/certificates
 
 # MYSQL SETUP
 DB_TITLE=db_wordpress
