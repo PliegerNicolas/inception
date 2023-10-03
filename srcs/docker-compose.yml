@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 14:46:20 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/03 18:24:37 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/03 19:05:10 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Latest version as of 21 september 2023
@@ -103,10 +103,10 @@ services:
     networks:
       - inception
 
-  ftp:
-    container_name: ftp
+  ftp-server:
+    container_name: ftp-server
     build:
-      context: ./requirements/bonus/ftp
+      context: ./requirements/bonus/ftp-server
       args:
         DOMAIN_NAME: ${DOMAIN_NAME}
         FTP_CERTS: ${FTP_CERTS}

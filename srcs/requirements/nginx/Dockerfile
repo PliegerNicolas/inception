@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 12:05:58 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/03 18:26:11 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/03 18:57:03 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -15,19 +15,6 @@ FROM	alpine:3.17.5
 # Retrieve .env variables during image construction
 ARG	DOMAIN_NAME
 ARG	NGINX_CERTS
-
-RUN echo "${NGINX_CERTS}"
-RUN echo "${NGINX_CERTS}"
-RUN echo "${NGINX_CERTS}"
-RUN echo "${NGINX_CERTS}"
-RUN echo "${NGINX_CERTS}"
-RUN echo "${NGINX_CERTS}"
-RUN echo "${NGINX_CERTS}"
-RUN echo "${NGINX_CERTS}"
-RUN echo "${NGINX_CERTS}"
-RUN echo "${NGINX_CERTS}"
-RUN echo "${NGINX_CERTS}"
-RUN echo "${NGINX_CERTS}"
 
 # Install dependencies
 RUN	apk update && apk upgrade && apk add --no-cache \
