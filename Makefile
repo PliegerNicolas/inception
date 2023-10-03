@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 13:38:49 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/02 18:32:39 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/03 13:25:56 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,8 +66,10 @@ prune:
 
 clean:	down prune
 
+fclean:	clean
+
 system_prune:
 	@echo "[i] Prune system images."
 	@docker system prune -a
 
-.PHONY: up down start stop re prune clean system_prune
+.PHONY: up down start stop re prune clean fclean system_prune

@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/23 21:13:39 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/02 21:18:02 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/03 13:52:16 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -38,6 +38,7 @@ RUN	apk update && apk upgrade && apk add --no-cache \
 		php81-iconv \
 		php81-intl \
 		php81-tokenizer \
+		php81-ctype \
 		php81-redis && \
 	rm -f /var/cache/apk/*
 

@@ -2,11 +2,13 @@
 
 # Wait for mariaDB ENTRYPOINT script to finish.
 until mysqladmin ping -h mariadb -u${DB_USER_NAME} -p${DB_USER_PASSWORD}; do
-	echo "Waiting for MariaDB to be ready..."
-	sleep 1
+	echo "[i]Waiting for MariaDB to be ready..."
+	sleep 2
 done
-
 echo "[i] MariaDB is ready."
+
+echo "[i] Make /var/www/html folder if needed."
+mkdir -p /var/www/html
 
 if [ ! -f /var/www/html/wp-config.php ]; then
 
@@ -48,8 +50,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 
 	echo "[i] Install 'bravada' WordPress theme and delete some default ones."
 	wp theme install bravada --activate
-	wp theme delete twentytwentyone
-	wp theme delete twentytwentytwo
+	wp theme delete twentytwentyone twentytwentytwo
 
 	echo "[i] Uninstall inactive extensions"
 	wp plugin delete akismet hello
@@ -81,7 +82,8 @@ adduser -S -D -H -G www-data -s /sbin/nologin www-data
 
 echo "[i] Set /var/www/html/ property and rights."
 chown -R www-data:www-data /var/www/html
-chown -R 755 /var/www/html
+chmod -R 755 /var/www/html
+find /var/www/html -type f -exec chmod 644 {} \;
 
 echo "[i] Build php81 run-time directory."
 mkdir -p /run/php/
