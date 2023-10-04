@@ -1,26 +1,25 @@
 server
 {
-	listen		443 ssl;
-	listen		[::]:443 ssl;
+	listen	443 ssl;
+	listen	[::]:443 ssl;
 
-	server_name	${DOMAIN_NAME} www.${DOMAIN_NAME};
+	server_name ${DOMAIN_NAME} www.${DOMAIN_NAME};
 
+	ssl_protocols		TLSv1.2 TLSv1.3;
 	ssl_certificate		${NGINX_CERTS}/${DOMAIN_NAME}.crt;
 	ssl_certificate_key	${NGINX_CERTS}/${DOMAIN_NAME}.key;
 
-	ssl_protocols			TLSv1.2 TLSv1.3;
-
-	root	/var/www/html;
+	root	${HTML_PATH};
 	index	index.php index.htm index.html;
 
-	location /
+	location /wordpress/
 	{
 		try_files $uri $uri/ =404;
 	}
 
 	location ~ \.php$
 	{
-		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		fastcgi_split_path_info ^(/wordpress/.+\.php)(/.+)$;
 		fastcgi_pass wordpress:9000;
 		fastcgi_index index.php;
 		include fastcgi_params;

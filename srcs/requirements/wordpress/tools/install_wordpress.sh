@@ -54,8 +54,8 @@ if [ ! -f ${WP_PATH}/wp-config.php ]; then
 		--role="subscriber"
 
 	echo "[i] Inforce HTTPS/SSH on wordpress by default."
-	wp option update siteurl "https://${DOMAIN_NAME}"
-	wp option update home "https://${DOMAIN_NAME}"
+	wp option update siteurl "https://${DOMAIN_NAME}/wordpress"
+	wp option update home "https://${DOMAIN_NAME}/wordpress"
 	wp config set FORCE_SSL_ADMIN true --raw
 
 	echo "[i] Install 'bravada' WordPress theme and delete some default ones."
