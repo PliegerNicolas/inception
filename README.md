@@ -62,7 +62,7 @@ The project should be structured something like this but liberties can be taken 
 
 To setup na new local `domain name` you can use the following command :
 ```
-sudo echo "127.0.0.1    ${USER}.42.fr www.${USER}.42.fr" > /etc/hosts
+sudo echo "127.0.0.1    ${USER}.42.fr www.${USER}.42.fr" >> /etc/hosts
 ```
 
 If you want to handle this more cleanly, you can go to `/etc/hosts` and add the line by hand. But that file hasn't access to environement variables so ${USER} should be filled in by hand.
