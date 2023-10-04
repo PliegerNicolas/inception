@@ -12,12 +12,7 @@ server
 	root	${HTML_PATH};
 	index	index.php index.htm index.html;
 
-	location /
-	{
-		try_files $uri $uri/ /static/index.html;
-	}
-
-	location /wordpress/
+	location /wordpress
 	{
 		try_files $uri $uri/ =404;
 	}
@@ -30,5 +25,10 @@ server
 		include fastcgi_params;
 		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 		fastcgi_param PATH_INFO $fastcgi_path_info;
+	}
+
+	location /
+	{
+		try_files /static/index.html =404;
 	}
 }

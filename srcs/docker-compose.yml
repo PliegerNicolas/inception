@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 14:46:20 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/04 21:29:33 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/04 23:49:14 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Latest version as of 21 september 2023
@@ -117,3 +117,6 @@ services:
       - website_data:/var/www/html
     networks:
       - inception
+    depends_on:
+      - wordpress
+
