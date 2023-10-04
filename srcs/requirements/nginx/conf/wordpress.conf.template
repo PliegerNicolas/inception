@@ -12,6 +12,11 @@ server
 	root	${HTML_PATH};
 	index	index.php index.htm index.html;
 
+	location /
+	{
+		try_files $uri $uri/ /static/index.html;
+	}
+
 	location /wordpress/
 	{
 		try_files $uri $uri/ =404;
