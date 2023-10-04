@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 13:38:49 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/03 19:54:33 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/04 21:27:16 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,8 @@ FTP_IP				:=		$(shell docker inspect -f '{{range .NetworkSettings.Networks}}{{.I
 define build_volumes
 
 	if [ ! -d ~/data/wordpress ]; then \
-		echo "[i] Building volume folder : ${HOME}/data/wordpress."; \
-		mkdir -p ~/data/wordpress; \
+		echo "[i] Building volume folder : ${HOME}/data/website."; \
+		mkdir -p ~/data/website; \
 	fi
 
 	if [ ! -d ~/data/mariadb ]; then \

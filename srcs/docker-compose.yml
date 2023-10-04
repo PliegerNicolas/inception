@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 14:46:20 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/03 19:05:10 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/04 21:29:33 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Latest version as of 21 september 2023
@@ -19,11 +19,11 @@ networks:
 
 # Volumes
 volumes:
-  wordpress_data:
+  website_data:
     driver: local
     driver_opts:
       type: none
-      device: ${HOME}/data/wordpress
+      device: ${HOME}/data/website
       o: bind
   mariadb_data:
     driver: local
@@ -46,7 +46,7 @@ services:
     env_file:
       - .env
     volumes:
-      - wordpress_data:/var/www/html
+      - website_data:/var/www/html
     networks:
       - inception
     ports:
@@ -82,7 +82,7 @@ services:
     env_file:
       - .env
     volumes:
-      - wordpress_data:/var/www/html
+      - website_data:/var/www/html
     networks:
       - inception
     depends_on:
@@ -114,6 +114,6 @@ services:
     env_file:
       - .env
     volumes:
-      - wordpress_data:/var/www/html
+      - website_data:/var/www/html
     networks:
       - inception

@@ -7,31 +7,39 @@ until mysqladmin ping -h mariadb -u${DB_USER_NAME} -p${DB_USER_PASSWORD}i > /dev
 done
 echo "[i] MariaDB is ready."
 
-echo "[i] Make /var/www/html folder if needed."
-mkdir -p /var/www/html
+echo "[i] Make ${WP_PATH} & ${STATIC_PATH} folder if needed."
+mkdir -p ${WP_PATH}
+mkdir -p ${STATIC_PATH}
 
-if [ ! -f /var/www/html/wp-config.php ]; then
+if [ ! -f ${STATIC_PATH}/index.html ]; then
 
 	echo "[i] Insert static website (index.html)."
-	mv /tmp/index.html /var/www/html/index.html
+	mv /tmp/index.html ${STATIC_PATH}
+
+fi
+
+if [ ! -f ${WP_PATH}/wp-config.php ]; then
+
+	cd ${WP_PATH}
 
 	echo "[i] Install WP-CLI..."
 	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 	chmod +x wp-cli.phar && \
 	mv wp-cli.phar /usr/local/bin/wp
 
-	echo "[i] Download wordpress at /var/www/html path."
-	wp core download --path=/var/www/html --version=6.3.1 --locale=fr_FR
+
+	echo "[i] Download wordpress at ${WP_PATH} path."
+	wp core download --version=6.3.1 --locale=fr_FR
 
 	echo "[i] Configure wp-config.php file."
-	wp config create --path=/var/www/html \
+	wp config create \
 		--dbname="${DB_TITLE}" \
 		--dbuser="${DB_USER_NAME}" \
 		--dbpass="${DB_USER_PASSWORD}" \
 		--dbhost="${DB_HOST}:3306"
 
 	echo "[i] Install wordpress website process with admin account."
-	wp core install --path=/var/www/html \
+	wp core install \
 		--url="${DOMAIN_NAME}" \
 		--title="${DOMAIN_NAME}" \
 		--admin_user="${DB_USER_NAME}" \
@@ -76,15 +84,17 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	echo "[i] Enable Object Cache."
 	wp redis enable
 
+	cd ${HTML_PATH}
+
 fi
 
 echo "[i] Create www-data user/group"
 adduser -S -D -H -G www-data -s /sbin/nologin www-data
 
-echo "[i] Set /var/www/html/ property and rights."
-chown -R www-data:www-data /var/www/html
-chmod -R 755 /var/www/html
-find /var/www/html -type f -exec chmod 644 {} \;
+echo "[i] Set ${HTML_PATH} property and rights."
+chown -R www-data:www-data ${HTML_PATH}
+chmod -R 755 ${HTML_PATH}
+find ${HTML_PATH} -type f -exec chmod 644 {} \;
 
 echo "[i] Build php81 run-time directory."
 mkdir -p /run/php/
