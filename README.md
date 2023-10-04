@@ -65,7 +65,7 @@ To setup na new local `domain name` you can use the following command :
 sudo echo "127.0.0.1    ${USER}.42.fr www.${USER}.42.fr" >> /etc/hosts
 ```
 
-If you want to handle this more cleanly, you can go to `/etc/hosts` and add the line by hand. But that file hasn't access to environement variables so ${USER} should be filled in by hand.
+If you want to handle this more cleanly, you can go to `/etc/hosts` and add the line by hand. But that file hasn't access to environment variables so ${USER} should be filled in by hand.
 
 ## Environnement file (.env)
 
