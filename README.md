@@ -60,38 +60,12 @@ The project should be structured something like this but liberties can be taken 
 
 ## Project setup
 
-To setup a new local `domain name` you can go to ...
-
-```sudo nano /etc/hosts```
-
-And complete the file as this :     
-`${USER}` is not available in `/etc/hosts` and should be `hard-coded`.
-
+To setup na new local `domain name` you can use the following command :
 ```
-# This file describes a number of hostname-to-address
-# mappings for the TCP/IP subsystem. It is mostly
-# used at boot time, when no name servers are running.
-# On small systems, this file can be used instead of a
-# "named" name server.
-
-# Syntax:
-# IP-Address  Full-Qualified-Hostname  Short-Hostname
-
-127.0.0.1       localhost
-127.0.0.1       ${USER}.42.fr www.${USER}.42.fr
-
-# special IPv6 addresses
-::1             localhost ip6-localhost ip6-loopback
-
-fe00::0         ip6-localnet
-
-ff00::0         ip6-mcastprefix
-ff02::1         ip6-allnodes
-ff02::2         ip6-allrouters
-ff02::3         ip6-allhosts
-
-# End of file
+sudo echo "127.0.0.1    ${USER}.42.fr www.${USER}.42.fr" > /etc/hosts
 ```
+
+If you want to handle this more cleanly, you can go to `/etc/hosts` and add the line by hand. But that file hasn't access to environement variables so ${USER} should be filled in by hand.
 
 ## Environnement file (.env)
 
@@ -129,3 +103,18 @@ REDIS_HOST=redis
 FTP_USER_NAME=${USER}
 FTP_USER_PASSWORD=Password123
 ```
+
+## Bonus
+
+A Dockerfile must be written for each extra service. Thus, each one of them will run
+inside its own container and will have, if necessary, its dedicated volume.
+
+TODO :
+• Set up redis cache for your WordPress website in order to properly manage the
+cache.
+• Set up a FTP server container pointing to the volume of your WordPress website.
+• Create a simple static website in the language of your choice except PHP (Yes, PHP
+is excluded!). For example, a showcase site or a site for presenting your resume.
+• Set up Adminer.
+• Set up a service of your choice that you think is useful. During the defense, you
+will have to justify your choice.
