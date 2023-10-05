@@ -15,6 +15,7 @@ if [ ! -f ${STATIC_PATH}/index.html ]; then
 
 	echo "[i] Insert static website (index.html)."
 	mv /tmp/index.html ${STATIC_PATH}
+	mv /tmp/styles.css ${STATIC_PATH}
 
 fi
 
