@@ -1,68 +1,93 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+/* Reset to default CSS configuration */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
+body {
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+}
+
+/* Setup body */
+
+body {
+	height: 100vh;
+	width: 100vw;
+	background-color: #F5F5F5;
+}
+
+/* Header */
+
 header {
-    background: linear-gradient(to bottom, #97b5db, #aad3e3);
-    color: #24293b;
-    padding: 20px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	background: #789789;
+	box-shadow: 0px 0px 8px 2px rgba(0,0,0,0.2);
+	height: 150px;
+	width: 100vw;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	color: #FFF;
+	text-shadow: 2px, 2px, 4px, rgba(0, 0, 0, 0.5);
+
+	margin-bottom: 1%;
 }
 
 header h1 {
-    font-size: 28px;
+	font-size: 36px;
+	margin-bottom: 2px;
 }
 
 header p {
-    font-size: 18px;
+	font-size: 12px;
 }
 
-.project-description {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    border-radius: 5px;
-    margin: 50px 25vw;
+/* Sections */
+
+section {
+	background: #8EbA8A;
+	box-shadow: 0px 2px 8px 2px rgba(0,0,0,0.2);
+
+	height: auto;
+	width: auto;
+	margin: 30px 20%;
+	padding: 2% 10%;
+	border-radius: 5px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	color: #FFF;
+	text-shadow: 2px, 2px, 4px, rgba(0, 0, 0, 0.5);
 }
 
-.project-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 20px;
+section h2 {
+	font-size: 24px;
+	margin-bottom: 8px;
 }
 
-.project-description p {
-    font-size: 18px;
-    margin: 20px;
+section p {
+	font-size: 16px;
+	text-align: center;
+	margin: 5px 0;
 }
 
-.links {
-    margin: 20px;
+section a {
+	color: #D8F5D5;
+	text-decoration: none;
+	font-weight: bold;
+	background-color: transparent;
+	transition: color 0.3s ease, background-color 0.3s ease, text-decoration 0.3s ease;
+
+	margin-top: 4px;
 }
 
-.links a {
-    display: block;
-    font-size: 20px;
-    margin: 10px 0;
-    text-decoration: none;
-    color: #007acc;
-    transition: color 0.2s;
-}
-
-.links a:hover {
-    color: #005d99;
-}
-
-footer {
-    background: linear-gradient(to bottom, #97b5db, #aad3e3);
-    color: #24293b;
-    padding: 12px 0;
-    font-size: 16px;
-    margin-top: auto;
+section a:hover {
+	color: #B6CFD9;
 }

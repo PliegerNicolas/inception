@@ -4,35 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <title>Inception - École 42, Paris</title>
+    <title>Inception</title>
 </head>
 <body>
     <header>
-    	<h1>Inception - École 42, Paris</h1>
-        <p>Nicolas Plieger</p>
+    	<h1>&copy; Inception - École 42, Paris</h1>
+        <p>By Nicolas Plieger</p>
     </header>
 
-    <div class="project-description">
-        <div class="project-title">Project Description</div>
-        <p>This project aims to broaden your knowledge of system administration by using Docker.</p>
-        <p>You will virtualize several Docker images, creating them in your new personal virtual machine.</p>
-    </div>
+	<section class="project-description">
+		<h2>Inception : what are docker containers ?</h2>
+		<p>Docker containers are lightweight and standalone executable packages to run an applications. This makes them particularly portable.</p>
+		<p>They share the host's operating system's kernel, making them more lightweight and ressource efficient than Virtual Machines. They provide process-level isolation, isolating the application and it's dependencies. But this isolation is less strict than the one of Virtual Machines.</p>
+	</section>
 
-    <div class="links">
-        <a href="../wordpress">Wordpress Index</a>
-        <a href="../wordpress/wp-login.php">Wordpress Login</a>
-        <a href="../adminer">Adminer</a>
-    </div>
+	<section class="links">
+		<h2>Links</h2>
+		<a href="../wordpress">Wordpress: index</a>
+		<a href="../wordpress/wp-login.php">Wordpress: login</a>
+		<a href="../wordpress/wp-admin">Wordpress: admin dashboard</a>
+		<a href="../adminer">Adminer</a>
+	</section>
 
-	<div>
-		<p>Startup can take some time.</p>
-		<p>Checkout installation processes of the different containers via the following link :</p>
-		<p>- docker logs [container_name]</p>
-	</div>
+	<section class="specifications">
+		<h2>Specifications</h2>
+		<p>Startup can be slow-ish.</p>
+		<p>This is because installation and configuration scripts are launched at ENTRYPOINT, thus when the container is launched instead of at creation.</p>
+	</section>
 
-    <footer>
-        &copy; Inception - École 42, Paris - Nicolas Plieger - 2023
-    </footer>
 </body>
 </html>
 
