@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 14:46:20 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/05 15:36:37 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/05 16:04:49 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Latest version as of 21 september 2023
@@ -141,8 +141,13 @@ services:
     container_name: prometheus
     build:
       context: ./requirements/bonus/prometheus
+      args:
+        HTML_PATH: ${HTML_PATH}
+        PROMETHEUS_PATH: ${PROMETHEUS_PATH}
     restart: unless-stopped
     env_file:
       - .env
+    volumes:
+      - website_data:/var/www/html
     networks:
       - inception

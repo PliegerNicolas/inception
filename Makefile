@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 13:38:49 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/05 12:45:44 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/05 16:13:57 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,19 +30,24 @@ FTP_IP				:=		$(shell docker inspect -f '{{range .NetworkSettings.Networks}}{{.I
 
 define build_volumes
 
-	if [ ! -d ~/data/website ]; then \
-		echo "[i] Building volume folder : ${HOME}/data/website."; \
+	if [ ! -d ${HOME}/data/website ]; then \
+		echo "[i] Building volume folder : ${HOME}/data/website"; \
 		mkdir -p ${HOME}/data/website; \
 	fi
 
-	if [ ! -d ~/data/mariadb ]; then \
-		echo "[i] Building volume folder : ${HOME}/data/mariadb."; \
+	if [ ! -d ${HOME}/data/mariadb ]; then \
+		echo "[i] Building volume folder : ${HOME}/data/mariadb"; \
 		mkdir -p ${HOME}/data/mariadb; \
 	fi
 
-	if [ ! -d ~/data/adminer ]; then \
-		echo "[i] Building volume folder : ${HOME}/data/adminer."; \
+	if [ ! -d ${HOME}/data/adminer ]; then \
+		echo "[i] Building volume folder : ${HOME}/data/adminer"; \
 		mkdir -p ${HOME}/data/adminer; \
+	fi
+
+	if [ ! -d ${HOME}/data/adminer ]; then \
+		echo "[i] Building volume folder : ${HOME}/data/prometheus"; \
+		mkdir -p ${HOME}/data/prometheus; \
 	fi
 
 endef

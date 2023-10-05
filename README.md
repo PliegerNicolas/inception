@@ -90,11 +90,15 @@ DB_USER_PASSWORD=Password123
 # WEBSITE
 HTML_PATH=/var/www/html
 WP_PATH=${HTML_PATH}/wordpress
-STATIC_PATH=${HTML_PATH}/static
 
 # **************************************************************************** #
 # *                                   BONUS                                  * #
 # **************************************************************************** #
+
+# WEBSITE
+STATIC_PATH=${HTML_PATH}/static
+ADMINER_PATH=${HTML_PATH}/adminer
+PROMETHEUS_PATH=${HTML_PATH}/prometheus
 
 # Redis
 REDIS_HOST=redis
