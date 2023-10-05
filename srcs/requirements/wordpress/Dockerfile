@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/23 21:13:39 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/05 04:19:39 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/05 12:31:02 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -17,6 +17,7 @@ ARG	DB_TITLE
 ARG	DB_USER_NAME
 ARG	DB_USER_PASSWORD
 ARG	DB_HOST
+ARG HTML_PATH
 
 # Install dependencies
 RUN	apk update && apk upgrade && apk add --no-cache \
@@ -56,7 +57,7 @@ RUN	chmod +x /etc/scripts/install_wordpress.sh
 
 ENTRYPOINT	["sh", "/etc/scripts/install_wordpress.sh"]
 
-WORKDIR	"/var/www/html"
+WORKDIR	"${HTML_PATH}"
 
 # Expose PHP-FPM port
 EXPOSE	9000

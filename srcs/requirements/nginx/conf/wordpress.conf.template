@@ -17,6 +17,12 @@ server
 		try_files $uri $uri/ =404;
 	}
 
+	location /adminer
+	{
+		index adminer.php
+		try_files $uri $uri/ =404;
+	}
+
 	location ~ \.php$
 	{
 		fastcgi_split_path_info ^(/wordpress/.+\.php)(/.+)$;

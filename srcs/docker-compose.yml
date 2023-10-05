@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 14:46:20 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/04 23:49:14 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/05 12:41:17 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Latest version as of 21 september 2023
@@ -78,6 +78,7 @@ services:
         DB_USER_NAME: ${DB_USER_NAME}
         DB_USER_PASSWORD: ${DB_USER_PASSWORD}
         DB_HOST: ${DB_HOST}
+        HTML_PATH: ${HTML_PATH}
     restart: unless-stopped
     env_file:
       - .env
@@ -120,3 +121,16 @@ services:
     depends_on:
       - wordpress
 
+  adminer:
+    container_name: adminer
+    build:
+      context: ./requirements/bonus/adminer
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - website_data:/var/www/html
+    networks:
+      - inception
+    depends_on:
+      - mariadb
