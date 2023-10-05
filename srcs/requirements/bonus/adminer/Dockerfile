@@ -5,23 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/05 12:06:50 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/05 12:30:30 by nicolas          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Dockerfile                                         :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/02 18:59:38 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/03 18:42:36 by nicolas          ###   ########.fr        #
+#    Created: 2023/10/05 12:44:31 by nicolas           #+#    #+#              #
+#    Updated: 2023/10/05 12:44:44 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
 FROM	alpine:3.17.5
+
+# Retrieve .env variables during image construction
+ARG HTML_PATH
+
 
 # Install dependencies
 RUN	apk update && apk upgrade && apk add --no-cache \
@@ -41,7 +34,7 @@ RUN	chmod +x /etc/scripts/configure_adminer.sh
 
 ENTRYPOINT	["sh", "/etc/scripts/configure_adminer.sh"]
 
-WORKDIR	"/var/www/html"
+WORKDIR	"${HTML_PATH}"
 
 # Expose port 8888 (Default would be 8080 or 80 or 443)
 EXPOSE 8888

@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 13:38:49 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/04 22:34:14 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/05 12:45:44 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,12 +32,17 @@ define build_volumes
 
 	if [ ! -d ~/data/website ]; then \
 		echo "[i] Building volume folder : ${HOME}/data/website."; \
-		mkdir -p ~/data/website; \
+		mkdir -p ${HOME}/data/website; \
 	fi
 
 	if [ ! -d ~/data/mariadb ]; then \
 		echo "[i] Building volume folder : ${HOME}/data/mariadb."; \
-		mkdir -p ~/data/mariadb; \
+		mkdir -p ${HOME}/data/mariadb; \
+	fi
+
+	if [ ! -d ~/data/adminer ]; then \
+		echo "[i] Building volume folder : ${HOME}/data/adminer."; \
+		mkdir -p ${HOME}/data/adminer; \
 	fi
 
 endef
