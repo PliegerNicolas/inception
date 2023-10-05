@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 13:38:49 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/05 16:13:57 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/05 19:22:49 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,11 +43,6 @@ define build_volumes
 	if [ ! -d ${HOME}/data/adminer ]; then \
 		echo "[i] Building volume folder : ${HOME}/data/adminer"; \
 		mkdir -p ${HOME}/data/adminer; \
-	fi
-
-	if [ ! -d ${HOME}/data/adminer ]; then \
-		echo "[i] Building volume folder : ${HOME}/data/prometheus"; \
-		mkdir -p ${HOME}/data/prometheus; \
 	fi
 
 endef
