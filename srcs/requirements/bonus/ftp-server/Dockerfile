@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/02 18:59:38 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/03 18:42:36 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/05 21:02:51 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -40,6 +40,7 @@ COPY	./conf/wp-vsftpd.conf /etc/vsftpd/conf.d/
 COPY	./tools/configure_vsftpd.sh /etc/scripts/
 RUN	chmod +x /etc/scripts/configure_vsftpd.sh
 
+# This script will be executed when the container starts.
 ENTRYPOINT	["sh", "/etc/scripts/configure_vsftpd.sh"]
 
 # Open default FTP Data Ports.

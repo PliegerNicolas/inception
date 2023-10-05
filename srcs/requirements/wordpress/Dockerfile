@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/23 21:13:39 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/05 12:31:02 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/05 21:03:52 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -55,8 +55,10 @@ RUN	mkdir -p /etc/scripts && chmod -R 755 /etc/scripts
 COPY	./tools/install_wordpress.sh /etc/scripts/
 RUN	chmod +x /etc/scripts/install_wordpress.sh
 
+# This script will be executed at container start.
 ENTRYPOINT	["sh", "/etc/scripts/install_wordpress.sh"]
 
+# Change working directory.
 WORKDIR	"${HTML_PATH}"
 
 # Expose PHP-FPM port

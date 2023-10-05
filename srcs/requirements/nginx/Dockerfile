@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 12:05:58 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/03 18:57:03 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/05 21:03:27 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -39,6 +39,7 @@ RUN	mkdir -p /etc/scripts && \
 COPY	./tools/generate_wordpress_conf.sh /etc/scripts/
 RUN	chmod +x /etc/scripts/generate_wordpress_conf.sh
 
+# This script will be executed when the container starts.
 ENTRYPOINT	["sh", "/etc/scripts/generate_wordpress_conf.sh"]
 
 # Expose port 443 for HTTPS

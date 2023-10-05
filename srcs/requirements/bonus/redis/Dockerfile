@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/02 18:59:32 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/02 20:29:58 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/05 21:03:09 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -28,6 +28,7 @@ COPY	./conf/wp-redis.conf /etc/redis/conf.d/
 COPY	./tools/configure_redis.sh /etc/scripts/
 RUN	chmod +x /etc/scripts/configure_redis.sh
 
+# This script will be executed when the container starts.
 ENTRYPOINT	["sh", "/etc/scripts/configure_redis.sh"]
 
 # Expose default Redis port : 6379
