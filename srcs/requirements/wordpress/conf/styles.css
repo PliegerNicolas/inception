@@ -64,6 +64,7 @@ section {
 	align-items: center;
 
 	color: #FFF;
+	text-align: center;
 	text-shadow: 2px, 2px, 4px, rgba(0, 0, 0, 0.5);
 }
 
@@ -74,7 +75,6 @@ section h2 {
 
 section p {
 	font-size: 16px;
-	text-align: center;
 	margin: 5px 0;
 }
 
