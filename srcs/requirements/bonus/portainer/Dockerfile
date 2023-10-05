@@ -5,39 +5,30 @@
 #                                                     +:+ +:+         +:+      #
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/05 12:44:31 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/05 23:38:43 by nicolas          ###   ########.fr        #
+#    Created: 2023/10/05 23:36:21 by nicolas           #+#    #+#              #
+#    Updated: 2023/10/05 23:57:19 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
 FROM	alpine:3.17.5
 
-# Retrieve .env variables during image construction
-ARG HTML_PATH
-
 # Install dependencies
 RUN	apk update && apk upgrade && apk add --no-cache \
 		curl \
-		mysql-client \
-		php81 \
-		php81-session \
-		php81-mysqli && \
+		tar && \
 	rm -f /var/cache/apk/*
 
 # Build necessary folders.
 RUN	mkdir -p /etc/scripts && chmod -R 755 /etc/scripts
 
-# Set up Adminer configuration
-COPY	./tools/configure_adminer.sh /etc/scripts/
-RUN	chmod +x /etc/scripts/configure_adminer.sh
+# Set up Portainer configuration
+COPY	./tools/configure_portainer.sh /etc/scripts/
+RUN	chmod +x /etc/scripts/configure_portainer.sh
 
 # This script will be executed when the container starts.
-ENTRYPOINT	["sh", "/etc/scripts/configure_adminer.sh"]
+ENTRYPOINT	["sh", "/etc/scripts/configure_portainer.sh"]
 
-# Set working directory
-WORKDIR	"${HTML_PATH}"
+# Expose port 9433 (default would be 9000)
+EXPOSE 9433
 
-# Expose port 8888 (Default would be 8080 or 80 or 443)
-EXPOSE 8888
-
-CMD	["php81", "-S", "0.0.0.0:8888", "-t", "/var/www"]
+CMD	["/var/portainer/portainer"]
