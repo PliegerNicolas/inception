@@ -11,26 +11,27 @@
     	<h1>&copy; Inception - École 42, Paris</h1>
         <p>By Nicolas Plieger</p>
     </header>
+	<section>
+		<div class="project-description">
+			<h2>Inception : what are docker containers ?</h2>
+			<p>Docker containers are lightweight and standalone executable packages to run an applications. This makes them particularly portable.</p>
+			<p>They share the host's operating system's kernel, making them more lightweight and ressource efficient than Virtual Machines. They provide process-level isolation, isolating the application and it's dependencies. But this isolation is less strict than the one of Virtual Machines.</p>
+		</div>
 
-	<section class="project-description">
-		<h2>Inception : what are docker containers ?</h2>
-		<p>Docker containers are lightweight and standalone executable packages to run an applications. This makes them particularly portable.</p>
-		<p>They share the host's operating system's kernel, making them more lightweight and ressource efficient than Virtual Machines. They provide process-level isolation, isolating the application and it's dependencies. But this isolation is less strict than the one of Virtual Machines.</p>
-	</section>
+		<div class="links">
+			<h2>Links</h2>
+			<a href="../wordpress">Wordpress: index</a>
+			<a href="../wordpress/wp-login.php">Wordpress: login</a>
+			<a href="../wordpress/wp-admin">Wordpress: admin dashboard</a>
+			<a href="../adminer">Adminer</a>
+			<a href="../portainer">Portainer</a>
+		</div>
 
-	<section class="links">
-		<h2>Links</h2>
-		<a href="../wordpress">Wordpress: index</a>
-		<a href="../wordpress/wp-login.php">Wordpress: login</a>
-		<a href="../wordpress/wp-admin">Wordpress: admin dashboard</a>
-		<a href="../adminer">Adminer</a>
-		<a href="../portainer">Portainer</a>
-	</section>
-
-	<section class="specifications">
-		<h2>Specifications</h2>
-		<p>Startup can be slow-ish.</p>
-		<p>This is because installation and configuration scripts are launched at ENTRYPOINT, thus when the container is launched instead of at creation.</p>
+		<div class="specifications">
+			<h2>Specifications</h2>
+			<p>Startup can be slow-ish.</p>
+			<p>This is because installation and configuration scripts are launched at ENTRYPOINT, thus when the container is launched instead of at creation.</p>
+		</div>
 	</section>
 </body>
 </html>
