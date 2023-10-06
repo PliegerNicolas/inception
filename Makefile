@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 13:38:49 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/06 00:01:21 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/06 22:37:17 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,13 +40,7 @@ define build_volumes
 		mkdir -p ${HOME}/data/mariadb; \
 	fi
 
-	if [ ! -d ${HOME}/data/adminer ]; then \
-		echo "[i] Building volume folder : ${HOME}/data/adminer"; \
-		mkdir -p ${HOME}/data/adminer; \
-	fi
-
 endef
-
 
 define connect_to_ftp
 	if [ -n "$$(command -v lftp)" ]; then \
@@ -99,6 +93,5 @@ lftp:
 system_prune:
 	@echo "[i] Prune system images."
 	@docker system prune -a
-
 
 .PHONY: up down start stop re prune clean fclean lftp system_prune
