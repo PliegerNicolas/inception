@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 14:46:20 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/05 23:59:54 by nicolas          ###   ########.fr        #
+#    Updated: 2023/10/06 17:36:29 by nplieger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Latest version as of 21 september 2023
@@ -141,6 +141,9 @@ services:
     container_name: portainer
     build:
       context: ./requirements/bonus/portainer
+      args:
+        DOMAIN_NAME: ${DOMAIN_NAME}
+        PORTAINER_CERTS: ${PORTAINER_CERTS}
     restart: unless-stopped
     env_file:
       - .env
@@ -148,5 +151,3 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - inception
-    ports:
-      - "9443:9443"

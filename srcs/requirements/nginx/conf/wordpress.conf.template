@@ -23,6 +23,13 @@ server
 		try_files $uri $uri/ =404;
 	}
 
+	location /portainer/
+	{
+		proxy_pass https://portainer:9443/;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+	}
+
 	location ~ \.php$
 	{
 		fastcgi_split_path_info ^(/wordpress/.+\.php)(/.+)$;

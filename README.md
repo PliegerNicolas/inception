@@ -76,9 +76,8 @@ If you want to handle this more cleanly, you can go to `/etc/hosts` and add the 
 
 DOMAIN_NAME=${USER}.42.fr
 
-# certificates
-NGINX_CERTS=/etc/nginx/ssl/certificates
-FTP_CERTS=/etc/vsftpd/ssl/certificates
+# CERTIFICATES
+NGINX_CERTS=/etc/nginx/ssl/certs
 
 # MYSQL SETUP
 DB_TITLE=db_wordpress
@@ -94,6 +93,10 @@ WP_PATH=${HTML_PATH}/wordpress
 # **************************************************************************** #
 # *                                   BONUS                                  * #
 # **************************************************************************** #
+
+# CERTIFICATES
+FTP_CERTS=/etc/vsftpd/ssl/certs
+PORTAINER_CERTS=/etc/portainer/ssl/certs
 
 # WEBSITE
 STATIC_PATH=${HTML_PATH}/static
