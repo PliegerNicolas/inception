@@ -6,7 +6,7 @@
 #    By: nicolas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 23:36:21 by nicolas           #+#    #+#              #
-#    Updated: 2023/10/06 17:29:36 by nplieger         ###   ########.fr        #
+#    Updated: 2023/10/07 17:07:04 by nicolas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Base image FROM penultimate alpine version (21 september 2023)
@@ -46,8 +46,5 @@ RUN	chmod +x /etc/scripts/configure_portainer.sh
 ENTRYPOINT	["sh", "/etc/scripts/configure_portainer.sh"]
 
 WORKDIR /var/portainer
-
-# Expose port 9443 (default would be 9000)
-EXPOSE 9001
 
 CMD	["/var/portainer/portainer"]
