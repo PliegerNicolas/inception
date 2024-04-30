@@ -5,6 +5,8 @@ This project aims to broaden my knowledge of system administration by using Dock
 
 By using 'make' you should be able to deploy a functionnal wordpress website on https://localhost (and optionally https://${USER}.42.fr or https://www.${USER}.42.fr).
 
+/!\ If you are a 42 student, do not copy this. As it is my first Docker project there are bad practices involved.
+
 ## Dependencies & necessities
 
 1. You need `Docker` and `docker compose`. You can figure out how to install it [here](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository).
